@@ -1,0 +1,538 @@
+[2025-07-27T10:21:28.113Z] SESSION_START: User Query: "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example:month: june, week : 1, AoV: 120"
+[2025-07-27T10:21:28.115Z] SYSTEM: Session ID: cli_1753611688112_zybd3idd4
+[2025-07-27T10:21:28.115Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T10:21:28.115Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:21:28.115Z] CONSOLE_LOG:    Query: "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example:month: june, week : 1, AoV: 120"
+[2025-07-27T10:21:34.655Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 2031,
+  "responseLength": 1017,
+  "tokens": null,
+  "callNumber": 1
+}
+[2025-07-27T10:21:34.657Z] CONSOLE_LOG:    ✓ Validation result: Valid
+[2025-07-27T10:21:34.657Z] CONSOLE_LOG:    📊 Required tables: cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_time
+[2025-07-27T10:21:34.657Z] CONSOLE_LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T10:21:34.657Z] CONSOLE_LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T10:21:34.657Z] CONSOLE_LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T10:21:34.657Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    Columns (12):
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - session_id (String)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - attribution_id (Nullable(String))
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - order_id (String)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:21:34.658Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "session_id",
+      "type": "String"
+    },
+    {
+      "name": "attribution_id",
+      "type": "Nullable(String)"
+    },
+    {
+      "name": "order_id",
+      "type": "String"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    Columns (10):
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - order_id (Int64)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:21:34.658Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:21:34.659Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_webhook_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_webhook_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "order_id",
+      "type": "Int64"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG: 
+📋 Table: cortex_2_dimensions.dim_time
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    Columns (11):
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - date_id (Date)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - day_of_week (UInt8)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - day_name (String)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - day_of_month (UInt8)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - week_of_year (UInt8)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - month (UInt8)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - year (UInt16)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - quarter (UInt8)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - month_name (String)
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG:    - is_weekend (UInt8)
+[2025-07-27T10:21:34.659Z] SCHEMA_DEBUG: Table cortex_2_dimensions.dim_time columns
+Data: {
+  "tableName": "cortex_2_dimensions.dim_time",
+  "columns": [
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "date_id",
+      "type": "Date"
+    },
+    {
+      "name": "day_of_week",
+      "type": "UInt8"
+    },
+    {
+      "name": "day_name",
+      "type": "String"
+    },
+    {
+      "name": "day_of_month",
+      "type": "UInt8"
+    },
+    {
+      "name": "week_of_year",
+      "type": "UInt8"
+    },
+    {
+      "name": "month",
+      "type": "UInt8"
+    },
+    {
+      "name": "month_name",
+      "type": "String"
+    },
+    {
+      "name": "quarter",
+      "type": "UInt8"
+    },
+    {
+      "name": "year",
+      "type": "UInt16"
+    },
+    {
+      "name": "is_weekend",
+      "type": "UInt8"
+    }
+  ]
+}
+[2025-07-27T10:21:34.659Z] CONSOLE_LOG: 
+
+[2025-07-27T10:21:38.948Z] CONSOLE_LOG:    🔧 Generated SQL:  SELECT toUInt16(toStartOfWeek(hour_id)) AS week_start, toUInt8(month(hour_id)) AS month, AVG(amount) AS AoV FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL GROUP BY week_start, month ORDER BY month, week_start LIMIT 10000 
+[2025-07-27T10:21:38.948Z] CONSOLE_LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T10:21:38.949Z] CONSOLE_LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales"
+]
+[2025-07-27T10:21:38.949Z] CONSOLE_LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T10:21:38.949Z] CONSOLE_LOG: Pre-validation issues found: 0
+[2025-07-27T10:21:38.949Z] CONSOLE_LOG: 🔍 Executing query:  SELECT toUInt16(toStartOfWeek(hour_id)) AS week_start, toUInt8(month(hour_id)) AS month, AVG(amount) AS AoV FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL GROUP BY week_start, month ORDER BY month, week_start LIMIT 10000 
+[2025-07-27T10:21:39.468Z] DATABASE_QUERY: Query SUCCESS
+Data: {
+  "query": " SELECT toUInt16(toStartOfWeek(hour_id)) AS week_start, toUInt8(month(hour_id)) AS month, AVG(amount) AS AoV FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL GROUP BY week_start, month ORDER BY month, week_start LIMIT 10000 ",
+  "success": true,
+  "rowCount": 24,
+  "error": null,
+  "queryNumber": 1
+}
+[2025-07-27T10:21:39.470Z] CONSOLE_LOG: 💾 Saved query result: query_cli_1753611688112_zybd3idd4_2025-07-27T10-21-39-469Z.json (24 rows, 2KB)
+[2025-07-27T10:21:39.470Z] CONSOLE_LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753611688112_zybd3idd4_2025-07-27T10-21-39-469Z.json
+[2025-07-27T10:21:39.471Z] CONSOLE_LOG: 📊 Using representative sample: 24 rows from 24 total
+[2025-07-27T10:21:39.470Z] CONSOLE_LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T10:21:39.470Z] CONSOLE_LOG:    📊 Query returned: 24 rows
+[2025-07-27T10:21:39.471Z] CONSOLE_LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T10:21:52.613Z] CONSOLE_LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T10-21-52-612Z.json
+[2025-07-27T10:21:52.614Z] MODEL_CALL: Called gpt-4o
+Data: {
+  "model": "gpt-4o",
+  "promptLength": 4968,
+  "responseLength": 4500,
+  "tokens": null,
+  "callNumber": 2
+}
+[2025-07-27T10:21:52.694Z] CONSOLE_LOG: ✅ Generated Python script passed validation
+[2025-07-27T10:21:52.695Z] CONSOLE_LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T10:21:52.726Z] CONSOLE_LOG: 🐍 Executing Python analysis script...
+[2025-07-27T10:21:52.727Z] CONSOLE_LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z.py
+[2025-07-27T10:21:52.727Z] CONSOLE_LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z
+[2025-07-27T10:21:52.728Z] CONSOLE_LOG: 📝 Starting Python script execution...
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: Loaded 24 rows with columns: ['week_start', 'month', 'AoV']
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python:    month       AoV
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: 0      1  2.052833
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: 1      2  2.312493
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: 3      4  1.698092
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: 4      5  1.898230
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: 6      7  2.081475
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: 2      3  2.052371
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: Analysis completed successfully!
+[2025-07-27T10:21:54.258Z] CONSOLE_LOG: 🐍 Python: 5      6  2.007302
+[2025-07-27T10:21:54.363Z] CONSOLE_LOG: Python script exited with code 0
+[2025-07-27T10:21:54.363Z] PYTHON_SCRIPT: Python execution SUCCESS
+Data: {
+  "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z.py",
+  "success": true,
+  "output": "Loaded 24 rows with columns: ['week_start', 'month', 'AoV']\n   month       AoV\n0      1  2.052833\n1      2  2.312493\n2      3  2.052371\n3      4  1.698092\n4      5  1.898230\n5      6  2.007302\n6      7  2.081475\nAnalysis completed successfully!\n",
+  "error": ""
+}
+[2025-07-27T10:21:54.365Z] CONSOLE_LOG: 📊 Step 6: Compiling final response...
+[2025-07-27T10:21:54.366Z] SESSION_END: Session completed successfully
+Data: {
+  "success": true,
+  "finalData": {
+    "success": true,
+    "workflow": {
+      "step": 1,
+      "userQuery": "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example:month: june, week : 1, AoV: 120",
+      "sessionId": "cli_1753611688112_zybd3idd4",
+      "timestamp": "2025-07-27T10:21:28.115Z",
+      "validation": {
+        "isValid": true,
+        "requiredTables": [
+          "cortex_3_facts.fct_sales",
+          "cortex_3_facts.fct_webhook_sales",
+          "cortex_2_dimensions.dim_time"
+        ],
+        "reason": "The query can be answered using the sales data from fct_sales and fct_webhook_sales to calculate the Average Order Value (AoV). The dim_time table is necessary to filter and group the data on a weekly basis for the past 6 months. The sales tables contain the amount and unit price needed to calculate revenue.",
+        "suggestedApproach": "To calculate the Average Order Value (AoV) for the past 6 months on a weekly basis, you can join the sales tables (fct_sales and fct_webhook_sales) with the dim_time table to filter the data by date. Then, group the results by week and calculate the AoV as the total revenue (amount * unit_price) divided by the number of orders for each week.",
+        "columnMappings": {
+          "inventory": "dim_variant.inventory",
+          "sales": "fct_sales.amount",
+          "revenue": "calculated from amount * unit_price"
+        }
+      },
+      "queryObj": {
+        "query": " SELECT toUInt16(toStartOfWeek(hour_id)) AS week_start, toUInt8(month(hour_id)) AS month, AVG(amount) AS AoV FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL GROUP BY week_start, month ORDER BY month, week_start LIMIT 10000 ",
+        "explanation": "This query calculates the Average Order Value (AoV) for the past 6 months, grouped by week and month. It filters out any records where the amount is NULL and orders the results by month and week.",
+        "estimatedRows": 10000,
+        "dataPreview": "The output will show the month, week number, and the corresponding Average Order Value for each week in the past 6 months."
+      },
+      "queryResult": {
+        "success": true,
+        "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753611688112_zybd3idd4_2025-07-27T10-21-39-469Z.json",
+        "filename": "query_cli_1753611688112_zybd3idd4_2025-07-27T10-21-39-469Z.json",
+        "dataFile": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753611688112_zybd3idd4_2025-07-27T10-21-39-469Z.json",
+        "rowCount": 24,
+        "dataSize": 1910,
+        "data": [
+          {
+            "week_start": 20114,
+            "month": 1,
+            "AoV": 2.0528332877087325
+          },
+          {
+            "week_start": 20114,
+            "month": 2,
+            "AoV": 3.1363636363636362
+          },
+          {
+            "week_start": 20121,
+            "month": 2,
+            "AoV": 1.9166666666666667
+          },
+          {
+            "week_start": 20128,
+            "month": 2,
+            "AoV": 2.200932684509327
+          },
+          {
+            "week_start": 20135,
+            "month": 2,
+            "AoV": 2.073238023576624
+          },
+          {
+            "week_start": 20142,
+            "month": 2,
+            "AoV": 2.2352652259332024
+          },
+          {
+            "week_start": 20142,
+            "month": 3,
+            "AoV": 2.5936507936507938
+          },
+          {
+            "week_start": 20149,
+            "month": 3,
+            "AoV": 2.3724366706875752
+          },
+          {
+            "week_start": 20156,
+            "month": 3,
+            "AoV": 1.8691993880673126
+          },
+          {
+            "week_start": 20163,
+            "month": 3,
+            "AoV": 1.9243580846634283
+          },
+          {
+            "week_start": 20170,
+            "month": 3,
+            "AoV": 1.8450892857142858
+          },
+          {
+            "week_start": 20177,
+            "month": 3,
+            "AoV": 1.7094890510948906
+          },
+          {
+            "week_start": 20177,
+            "month": 4,
+            "AoV": 1.6585778781038374
+          },
+          {
+            "week_start": 20184,
+            "month": 4,
+            "AoV": 1.9924043236926672
+          },
+          {
+            "week_start": 20191,
+            "month": 4,
+            "AoV": 1.4769470058882346
+          },
+          {
+            "week_start": 20198,
+            "month": 4,
+            "AoV": 1.818765036086608
+          },
+          {
+            "week_start": 20205,
+            "month": 4,
+            "AoV": 1.5437665782493368
+          },
+          {
+            "week_start": 20205,
+            "month": 5,
+            "AoV": 1.930298719772404
+          },
+          {
+            "week_start": 20212,
+            "month": 5,
+            "AoV": 1.8661604176554343
+          },
+          {
+            "week_start": 20254,
+            "month": 6,
+            "AoV": 2.201709401709402
+          },
+          {
+            "week_start": 20261,
+            "month": 6,
+            "AoV": 2.006242568370987
+          },
+          {
+            "week_start": 20268,
+            "month": 6,
+            "AoV": 1.813953488372093
+          },
+          {
+            "week_start": 20268,
+            "month": 7,
+            "AoV": 2.0233368164402648
+          },
+          {
+            "week_start": 20275,
+            "month": 7,
+            "AoV": 2.1396131202691335
+          }
+        ]
+      },
+      "strategy": {
+        "analysisDecision": {
+          "shouldAnalyze": true,
+          "reasoning": "The query involves calculating and analyzing the Average Order Value (AoV) on a weekly basis over the past 6 months. This requires aggregating data, identifying trends, and potentially visualizing these trends to provide insights. Python analysis can add value by automating these calculations, generating visualizations, and identifying patterns or anomalies in the data."
+        },
+        "insights": {
+          "immediate": [
+            "The data provides weekly AoV values for different months, which can be aggregated to observe monthly trends.",
+            "There is a noticeable variation in AoV across different weeks and months."
+          ],
+          "statistical": [
+            "Calculate the mean AoV for each month to identify any significant changes or trends.",
+            "Analyze the variance and standard deviation of AoV to understand the consistency of order values."
+          ],
+          "business": [
+            "Understanding AoV trends can help in forecasting revenue and planning marketing strategies.",
+            "Identifying weeks with higher AoV can inform promotional activities or resource allocation."
+          ]
+        },
+        "pythonScript": {
+          "description": "This script will calculate the average AoV for each week over the past 6 months, generate visualizations to show trends, and provide statistical summaries.",
+          "code": "# Import necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport os\n\n# Sample data\ndata = [\n {\"week_start\": 20114, \"month\": 1, \"AoV\": 2.0528332877087325},\n {\"week_start\": 20114, \"month\": 2, \"AoV\": 3.1363636363636362},\n {\"week_start\": 20121, \"month\": 2, \"AoV\": 1.9166666666666667},\n {\"week_start\": 20128, \"month\": 2, \"AoV\": 2.200932684509327},\n {\"week_start\": 20135, \"month\": 2, \"AoV\": 2.073238023576624},\n {\"week_start\": 20142, \"month\": 2, \"AoV\": 2.2352652259332024},\n {\"week_start\": 20142, \"month\": 3, \"AoV\": 2.5936507936507938},\n {\"week_start\": 20149, \"month\": 3, \"AoV\": 2.3724366706875752},\n {\"week_start\": 20156, \"month\": 3, \"AoV\": 1.8691993880673126},\n {\"week_start\": 20163, \"month\": 3, \"AoV\": 1.9243580846634283},\n {\"week_start\": 20170, \"month\": 3, \"AoV\": 1.8450892857142858},\n {\"week_start\": 20177, \"month\": 3, \"AoV\": 1.7094890510948906},\n {\"week_start\": 20177, \"month\": 4, \"AoV\": 1.6585778781038374},\n {\"week_start\": 20184, \"month\": 4, \"AoV\": 1.9924043236926672},\n {\"week_start\": 20191, \"month\": 4, \"AoV\": 1.4769470058882346},\n {\"week_start\": 20198, \"month\": 4, \"AoV\": 1.818765036086608},\n {\"week_start\": 20205, \"month\": 4, \"AoV\": 1.5437665782493368},\n {\"week_start\": 20205, \"month\": 5, \"AoV\": 1.930298719772404},\n {\"week_start\": 20212, \"month\": 5, \"AoV\": 1.8661604176554343},\n {\"week_start\": 20254, \"month\": 6, \"AoV\": 2.201709401709402},\n {\"week_start\": 20261, \"month\": 6, \"AoV\": 2.006242568370987},\n {\"week_start\": 20268, \"month\": 6, \"AoV\": 1.813953488372093},\n {\"week_start\": 20268, \"month\": 7, \"AoV\": 2.0233368164402648},\n {\"week_start\": 20275, \"month\": 7, \"AoV\": 2.1396131202691335}\n]\n\n# Create a DataFrame\ndf = pd.DataFrame(data)\n\n# Calculate average AoV per month\naov_monthly = df.groupby('month')['AoV'].mean().reset_index()\n\n# Plot AoV trends\nplt.figure(figsize=(10, 6))\nplt.plot(df['week_start'], df['AoV'], marker='o', linestyle='-')\nplt.title('Weekly Average Order Value (AoV) Trend')\nplt.xlabel('Week Start')\nplt.ylabel('Average Order Value (AoV)')\nplt.grid(True)\n\n# Save the plot\noutput_dir = '.' # Change this to your desired output directory\nplt.savefig(os.path.join(output_dir, 'weekly_aov_trend.png'))\nplt.close()\n\n# Print statistical summary\nprint(aov_monthly)\n",
+          "outputFiles": [
+            "weekly_aov_trend.png"
+          ],
+          "skipAnalysis": false,
+          "missingDependencies": []
+        },
+        "recommendations": [
+          "Monitor AoV trends regularly to identify any sudden changes or patterns.",
+          "Consider investigating weeks with unusually high or low AoV to understand underlying factors.",
+          "Use AoV insights to optimize pricing strategies and marketing campaigns."
+        ],
+        "followUpQuestions": [
+          "Are there specific weeks with significant deviations in AoV that require further investigation?",
+          "How do these AoV trends correlate with other business metrics such as sales volume or customer acquisition?"
+        ]
+      },
+      "analysisResult": {
+        "success": true,
+        "output": "Loaded 24 rows with columns: ['week_start', 'month', 'AoV']\n   month       AoV\n0      1  2.052833\n1      2  2.312493\n2      3  2.052371\n3      4  1.698092\n4      5  1.898230\n5      6  2.007302\n6      7  2.081475\nAnalysis completed successfully!\n",
+        "error": null,
+        "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z.py",
+        "outputDir": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z",
+        "outputFiles": [
+          {
+            "filename": "weekly_aov_trend.png",
+            "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z/weekly_aov_trend.png",
+            "size": 46120,
+            "type": ".png"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "dataProcessed": "24 rows (2KB)",
+      "query": " SELECT toUInt16(toStartOfWeek(hour_id)) AS week_start, toUInt8(month(hour_id)) AS month, AVG(amount) AS AoV FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL GROUP BY week_start, month ORDER BY month, week_start LIMIT 10000 ",
+      "insights": {
+        "immediate": [
+          "The data provides weekly AoV values for different months, which can be aggregated to observe monthly trends.",
+          "There is a noticeable variation in AoV across different weeks and months."
+        ],
+        "statistical": [
+          "Calculate the mean AoV for each month to identify any significant changes or trends.",
+          "Analyze the variance and standard deviation of AoV to understand the consistency of order values."
+        ],
+        "business": [
+          "Understanding AoV trends can help in forecasting revenue and planning marketing strategies.",
+          "Identifying weeks with higher AoV can inform promotional activities or resource allocation."
+        ]
+      },
+      "recommendations": [
+        "Monitor AoV trends regularly to identify any sudden changes or patterns.",
+        "Consider investigating weeks with unusually high or low AoV to understand underlying factors.",
+        "Use AoV insights to optimize pricing strategies and marketing campaigns."
+      ],
+      "followUpQuestions": [
+        "Are there specific weeks with significant deviations in AoV that require further investigation?",
+        "How do these AoV trends correlate with other business metrics such as sales volume or customer acquisition?"
+      ],
+      "analysisOutput": "Loaded 24 rows with columns: ['week_start', 'month', 'AoV']\n   month       AoV\n0      1  2.052833\n1      2  2.312493\n2      3  2.052371\n3      4  1.698092\n4      5  1.898230\n5      6  2.007302\n6      7  2.081475\nAnalysis completed successfully!\n",
+      "generatedFiles": [
+        {
+          "filename": "weekly_aov_trend.png",
+          "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z/weekly_aov_trend.png",
+          "size": 46120,
+          "type": ".png"
+        }
+      ]
+    }
+  },
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T10:21:28.113Z",
+    "endTime": "2025-07-27T10:21:54.366Z",
+    "durationMs": 26253,
+    "durationSeconds": 26
+  }
+}
+[2025-07-27T10:21:54.368Z] SYSTEM: Console output saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/logs/console_cli_1753611688112_zybd3idd4.log

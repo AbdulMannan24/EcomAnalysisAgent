@@ -1,0 +1,31 @@
+{
+  "sessionId": "cli_1753612557759_isa16vq4i",
+  "userQuery": "find me the top 10 products i need to restock considering, if the current inventory is less than 100, and the no of units sold inthe past 45 days is greater than 40 units",
+  "success": true,
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T10:35:57.760Z",
+    "endTime": "2025-07-27T10:36:20.458Z",
+    "durationMs": 22698,
+    "durationSeconds": 23
+  },
+  "summary": {
+    "totalQueries": 1,
+    "totalModelCalls": 2,
+    "modelBreakdown": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "totalRetries": 0,
+    "totalErrors": 0,
+    "duration": "23s",
+    "errorRate": "0.00%"
+  }
+}

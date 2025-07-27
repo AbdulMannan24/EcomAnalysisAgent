@@ -1,0 +1,518 @@
+[2025-07-27T10:02:40.784Z] SESSION_START: User Query: "can you find all the unique currencies users paid with, also calculate the total amount we received each month for the each currency for the last 6 months"
+[2025-07-27T10:02:40.786Z] SYSTEM: Session ID: cli_1753610560780_wr5efuwhw
+[2025-07-27T10:02:40.786Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T10:02:40.786Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:02:40.786Z] CONSOLE_LOG:    Query: "can you find all the unique currencies users paid with, also calculate the total amount we received each month for the each currency for the last 6 months"
+[2025-07-27T10:02:47.869Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 2049,
+  "responseLength": 1060,
+  "tokens": null,
+  "callNumber": 1
+}
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    📊 Required tables: cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_time
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    ✓ Validation result: Valid
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    Columns (12):
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - session_id (String)
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - attribution_id (Nullable(String))
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - order_id (String)
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:02:47.871Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "session_id",
+      "type": "String"
+    },
+    {
+      "name": "attribution_id",
+      "type": "Nullable(String)"
+    },
+    {
+      "name": "order_id",
+      "type": "String"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    Columns (10):
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - order_id (Int64)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    Columns (11):
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG: 
+📋 Table: cortex_2_dimensions.dim_time
+[2025-07-27T10:02:47.872Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_webhook_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_webhook_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "order_id",
+      "type": "Int64"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG:    - day_name (String)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - day_of_week (UInt8)
+[2025-07-27T10:02:47.872Z] CONSOLE_LOG:    - date_id (Date)
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG:    - week_of_year (UInt8)
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG:    - day_of_month (UInt8)
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG:    - month_name (String)
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG:    - quarter (UInt8)
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG:    - month (UInt8)
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG:    - year (UInt16)
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG:    - is_weekend (UInt8)
+[2025-07-27T10:02:47.873Z] SCHEMA_DEBUG: Table cortex_2_dimensions.dim_time columns
+Data: {
+  "tableName": "cortex_2_dimensions.dim_time",
+  "columns": [
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "date_id",
+      "type": "Date"
+    },
+    {
+      "name": "day_of_week",
+      "type": "UInt8"
+    },
+    {
+      "name": "day_name",
+      "type": "String"
+    },
+    {
+      "name": "day_of_month",
+      "type": "UInt8"
+    },
+    {
+      "name": "week_of_year",
+      "type": "UInt8"
+    },
+    {
+      "name": "month",
+      "type": "UInt8"
+    },
+    {
+      "name": "month_name",
+      "type": "String"
+    },
+    {
+      "name": "quarter",
+      "type": "UInt8"
+    },
+    {
+      "name": "year",
+      "type": "UInt16"
+    },
+    {
+      "name": "is_weekend",
+      "type": "UInt8"
+    }
+  ]
+}
+[2025-07-27T10:02:47.873Z] CONSOLE_LOG: 
+
+[2025-07-27T10:02:54.095Z] CONSOLE_LOG:    🔧 Generated SQL: SELECT currency_code, toStartOfMonth(hour_id) AS month, SUM(amount) AS total_amount FROM (SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL UNION ALL SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_webhook_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL) GROUP BY currency_code, month ORDER BY month, currency_code LIMIT 10000
+[2025-07-27T10:02:54.095Z] CONSOLE_LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T10:02:54.095Z] CONSOLE_LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T10:02:54.096Z] CONSOLE_LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales",
+  "FROM cortex_3_facts.fct_webhook_sales"
+]
+[2025-07-27T10:02:54.096Z] CONSOLE_LOG: Pre-validation issues found: 0
+[2025-07-27T10:02:54.096Z] CONSOLE_LOG: 🔍 Executing query: SELECT currency_code, toStartOfMonth(hour_id) AS month, SUM(amount) AS total_amount FROM (SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL UNION ALL SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_webhook_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL) GROUP BY currency_code, month ORDER BY month, currency_code LIMIT 10000
+[2025-07-27T10:02:54.659Z] DATABASE_QUERY: Query SUCCESS
+Data: {
+  "query": "SELECT currency_code, toStartOfMonth(hour_id) AS month, SUM(amount) AS total_amount FROM (SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL UNION ALL SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_webhook_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL) GROUP BY currency_code, month ORDER BY month, currency_code LIMIT 10000",
+  "success": true,
+  "rowCount": 21,
+  "error": null,
+  "queryNumber": 1
+}
+[2025-07-27T10:02:54.662Z] CONSOLE_LOG: 💾 Saved query result: query_cli_1753610560780_wr5efuwhw_2025-07-27T10-02-54-660Z.json (21 rows, 2KB)
+[2025-07-27T10:02:54.662Z] CONSOLE_LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753610560780_wr5efuwhw_2025-07-27T10-02-54-660Z.json
+[2025-07-27T10:02:54.662Z] CONSOLE_LOG:    📊 Query returned: 21 rows
+[2025-07-27T10:02:54.662Z] CONSOLE_LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T10:02:54.662Z] CONSOLE_LOG: 📊 Using representative sample: 21 rows from 21 total
+[2025-07-27T10:02:54.662Z] CONSOLE_LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T10:03:07.594Z] CONSOLE_LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T10-03-07-592Z.json
+[2025-07-27T10:03:07.595Z] MODEL_CALL: Called gpt-4o
+Data: {
+  "model": "gpt-4o",
+  "promptLength": 4918,
+  "responseLength": 4689,
+  "tokens": null,
+  "callNumber": 2
+}
+[2025-07-27T10:03:07.677Z] CONSOLE_LOG: ✅ Generated Python script passed validation
+[2025-07-27T10:03:07.677Z] CONSOLE_LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T10:03:07.706Z] CONSOLE_LOG: 🐍 Executing Python analysis script...
+[2025-07-27T10:03:07.706Z] CONSOLE_LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z.py
+[2025-07-27T10:03:07.706Z] CONSOLE_LOG: 📝 Starting Python script execution...
+[2025-07-27T10:03:07.706Z] CONSOLE_LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z
+[2025-07-27T10:03:22.691Z] CONSOLE_LOG: 🐍 Python: Loaded 21 rows with columns: ['currency_code', 'month', 'total_amount']
+[2025-07-27T10:03:22.691Z] CONSOLE_LOG: 🐍 Python: Analysis completed successfully!
+[2025-07-27T10:03:22.791Z] CONSOLE_LOG: Python script exited with code 0
+[2025-07-27T10:03:22.791Z] PYTHON_SCRIPT: Python execution SUCCESS
+Data: {
+  "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z.py",
+  "success": true,
+  "output": "Loaded 21 rows with columns: ['currency_code', 'month', 'total_amount']\nAnalysis completed successfully!\n",
+  "error": ""
+}
+[2025-07-27T10:03:22.792Z] CONSOLE_LOG: 📊 Step 6: Compiling final response...
+[2025-07-27T10:03:22.792Z] SESSION_END: Session completed successfully
+Data: {
+  "success": true,
+  "finalData": {
+    "success": true,
+    "workflow": {
+      "step": 1,
+      "userQuery": "can you find all the unique currencies users paid with, also calculate the total amount we received each month for the each currency for the last 6 months",
+      "sessionId": "cli_1753610560780_wr5efuwhw",
+      "timestamp": "2025-07-27T10:02:40.786Z",
+      "validation": {
+        "isValid": true,
+        "requiredTables": [
+          "cortex_3_facts.fct_sales",
+          "cortex_3_facts.fct_webhook_sales",
+          "cortex_2_dimensions.dim_time"
+        ],
+        "reason": "The query can be answered using the 'amount' column from both sales tables (fct_sales and fct_webhook_sales) to calculate total revenue per currency. The 'dim_time' table can be used to filter and group the data by month for the last 6 months. The unique currencies can be derived from the sales data if a currency column is present, which is assumed to be part of the sales data schema.",
+        "suggestedApproach": "To approach this query, first, aggregate the sales data from both fct_sales and fct_webhook_sales by month and currency. Use the 'dim_time' table to filter for the last 6 months. Then, group the results by currency and month to calculate the total amount received for each currency.",
+        "columnMappings": {
+          "inventory": "dim_variant.inventory",
+          "sales": "fct_sales.amount, fct_webhook_sales.amount",
+          "revenue": "calculated from amount * unit_price"
+        }
+      },
+      "queryObj": {
+        "query": "SELECT currency_code, toStartOfMonth(hour_id) AS month, SUM(amount) AS total_amount FROM (SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL UNION ALL SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_webhook_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL) GROUP BY currency_code, month ORDER BY month, currency_code LIMIT 10000",
+        "explanation": "This query retrieves all unique currencies used for payments and calculates the total amount received for each currency, grouped by month, for the last 6 months. It combines data from both sales tables, ensuring that only non-null amounts are considered.",
+        "estimatedRows": 10000,
+        "dataPreview": "The output will include unique currency codes, the corresponding month, and the total amount received for each currency."
+      },
+      "queryResult": {
+        "success": true,
+        "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753610560780_wr5efuwhw_2025-07-27T10-02-54-660Z.json",
+        "filename": "query_cli_1753610560780_wr5efuwhw_2025-07-27T10-02-54-660Z.json",
+        "dataFile": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753610560780_wr5efuwhw_2025-07-27T10-02-54-660Z.json",
+        "rowCount": 21,
+        "dataSize": 2149,
+        "data": [
+          {
+            "currency_code": "EUR",
+            "month": "2025-01-01",
+            "total_amount": 7499
+          },
+          {
+            "currency_code": "EUR",
+            "month": "2025-02-01",
+            "total_amount": 42230
+          },
+          {
+            "currency_code": "CHF",
+            "month": "2025-03-01",
+            "total_amount": 34
+          },
+          {
+            "currency_code": "DKK",
+            "month": "2025-03-01",
+            "total_amount": 2
+          },
+          {
+            "currency_code": "EUR",
+            "month": "2025-03-01",
+            "total_amount": 41379
+          },
+          {
+            "currency_code": "GBP",
+            "month": "2025-03-01",
+            "total_amount": 2
+          },
+          {
+            "currency_code": "CHF",
+            "month": "2025-04-01",
+            "total_amount": 396
+          },
+          {
+            "currency_code": "CZK",
+            "month": "2025-04-01",
+            "total_amount": 1
+          },
+          {
+            "currency_code": "DKK",
+            "month": "2025-04-01",
+            "total_amount": 1
+          },
+          {
+            "currency_code": "EUR",
+            "month": "2025-04-01",
+            "total_amount": 43269
+          },
+          {
+            "currency_code": "GBP",
+            "month": "2025-04-01",
+            "total_amount": 705
+          },
+          {
+            "currency_code": "PLN",
+            "month": "2025-04-01",
+            "total_amount": 2
+          },
+          {
+            "currency_code": "XOF",
+            "month": "2025-04-01",
+            "total_amount": 2
+          },
+          {
+            "currency_code": "CHF",
+            "month": "2025-05-01",
+            "total_amount": 26
+          },
+          {
+            "currency_code": "EUR",
+            "month": "2025-05-01",
+            "total_amount": 11475
+          },
+          {
+            "currency_code": "GBP",
+            "month": "2025-05-01",
+            "total_amount": 433
+          },
+          {
+            "currency_code": "USD",
+            "month": "2025-05-01",
+            "total_amount": 1
+          },
+          {
+            "currency_code": "EUR",
+            "month": "2025-06-01",
+            "total_amount": 63302
+          },
+          {
+            "currency_code": "GBP",
+            "month": "2025-06-01",
+            "total_amount": 480
+          },
+          {
+            "currency_code": "EUR",
+            "month": "2025-07-01",
+            "total_amount": 58027
+          },
+          {
+            "currency_code": "GBP",
+            "month": "2025-07-01",
+            "total_amount": 184
+          }
+        ]
+      },
+      "strategy": {
+        "analysisDecision": {
+          "shouldAnalyze": true,
+          "reasoning": "The query involves identifying unique currencies and calculating monthly totals, which are numerical data points that can benefit from Python analysis. Trends and patterns in currency usage and monthly totals can be visualized and analyzed to provide deeper insights."
+        },
+        "insights": {
+          "immediate": [
+            "The data includes multiple currencies such as EUR, CHF, DKK, GBP, CZK, PLN, XOF, and USD.",
+            "EUR is the most frequently used currency in the dataset."
+          ],
+          "statistical": [
+            "EUR has the highest total amount received across the months.",
+            "There is a noticeable increase in EUR transactions in June and July 2025."
+          ],
+          "business": [
+            "Understanding currency distribution can help in strategizing currency conversion and transaction fee management.",
+            "Identifying peak months for specific currencies can aid in financial forecasting and resource allocation."
+          ]
+        },
+        "pythonScript": {
+          "description": "This script will identify all unique currencies and calculate the total amount received each month for each currency over the last 6 months. It will also generate a line plot to visualize the trends in total amounts received per currency over time.",
+          "code": "# Import necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport os\n\n# Sample data\ndata = [\n {\"currency_code\": \"EUR\", \"month\": \"2025-01-01\", \"total_amount\": 7499},\n {\"currency_code\": \"EUR\", \"month\": \"2025-02-01\", \"total_amount\": 42230},\n {\"currency_code\": \"CHF\", \"month\": \"2025-03-01\", \"total_amount\": 34},\n {\"currency_code\": \"DKK\", \"month\": \"2025-03-01\", \"total_amount\": 2},\n {\"currency_code\": \"EUR\", \"month\": \"2025-03-01\", \"total_amount\": 41379},\n {\"currency_code\": \"GBP\", \"month\": \"2025-03-01\", \"total_amount\": 2},\n {\"currency_code\": \"CHF\", \"month\": \"2025-04-01\", \"total_amount\": 396},\n {\"currency_code\": \"CZK\", \"month\": \"2025-04-01\", \"total_amount\": 1},\n {\"currency_code\": \"DKK\", \"month\": \"2025-04-01\", \"total_amount\": 1},\n {\"currency_code\": \"EUR\", \"month\": \"2025-04-01\", \"total_amount\": 43269},\n {\"currency_code\": \"GBP\", \"month\": \"2025-04-01\", \"total_amount\": 705},\n {\"currency_code\": \"PLN\", \"month\": \"2025-04-01\", \"total_amount\": 2},\n {\"currency_code\": \"XOF\", \"month\": \"2025-04-01\", \"total_amount\": 2},\n {\"currency_code\": \"CHF\", \"month\": \"2025-05-01\", \"total_amount\": 26},\n {\"currency_code\": \"EUR\", \"month\": \"2025-05-01\", \"total_amount\": 11475},\n {\"currency_code\": \"GBP\", \"month\": \"2025-05-01\", \"total_amount\": 433},\n {\"currency_code\": \"USD\", \"month\": \"2025-05-01\", \"total_amount\": 1},\n {\"currency_code\": \"EUR\", \"month\": \"2025-06-01\", \"total_amount\": 63302},\n {\"currency_code\": \"GBP\", \"month\": \"2025-06-01\", \"total_amount\": 480},\n {\"currency_code\": \"EUR\", \"month\": \"2025-07-01\", \"total_amount\": 58027},\n {\"currency_code\": \"GBP\", \"month\": \"2025-07-01\", \"total_amount\": 184}\n]\n\n# Create a DataFrame\ndf = pd.DataFrame(data)\n\n# Convert 'month' to datetime\ndf['month'] = pd.to_datetime(df['month'])\n\n# Calculate total amount received each month for each currency\nmonthly_totals = df.groupby(['currency_code', df['month'].dt.to_period('M')])['total_amount'].sum().unstack().fillna(0)\n\n# Plot the data\nplt.figure(figsize=(10, 6))\nfor currency in monthly_totals.index:\n plt.plot(monthly_totals.columns.astype(str), monthly_totals.loc[currency], label=currency)\n\nplt.title('Total Amount Received Each Month by Currency')\nplt.xlabel('Month')\nplt.ylabel('Total Amount')\nplt.legend(title='Currency')\nplt.xticks(rotation=45)\nplt.tight_layout()\n\n# Save the plot\noutput_dir = '.' # Change this to your desired output directory\nplt.savefig(os.path.join(output_dir, 'currency_trends.png'))\nplt.show()",
+          "outputFiles": [
+            "currency_trends.png"
+          ],
+          "skipAnalysis": false,
+          "missingDependencies": []
+        },
+        "recommendations": [
+          "Monitor currency trends to optimize currency conversion strategies.",
+          "Consider hedging strategies for currencies with high volatility.",
+          "Allocate resources to handle peak transaction months effectively."
+        ],
+        "followUpQuestions": [
+          "Are there any specific currencies that are more profitable due to lower transaction fees?",
+          "How do currency trends correlate with market events or promotions?",
+          "What are the implications of currency fluctuations on overall revenue?"
+        ]
+      },
+      "analysisResult": {
+        "success": true,
+        "output": "Loaded 21 rows with columns: ['currency_code', 'month', 'total_amount']\nAnalysis completed successfully!\n",
+        "error": null,
+        "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z.py",
+        "outputDir": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z",
+        "outputFiles": [
+          {
+            "filename": "currency_trends.png",
+            "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z/currency_trends.png",
+            "size": 46685,
+            "type": ".png"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "dataProcessed": "21 rows (2KB)",
+      "query": "SELECT currency_code, toStartOfMonth(hour_id) AS month, SUM(amount) AS total_amount FROM (SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL UNION ALL SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_webhook_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL) GROUP BY currency_code, month ORDER BY month, currency_code LIMIT 10000",
+      "insights": {
+        "immediate": [
+          "The data includes multiple currencies such as EUR, CHF, DKK, GBP, CZK, PLN, XOF, and USD.",
+          "EUR is the most frequently used currency in the dataset."
+        ],
+        "statistical": [
+          "EUR has the highest total amount received across the months.",
+          "There is a noticeable increase in EUR transactions in June and July 2025."
+        ],
+        "business": [
+          "Understanding currency distribution can help in strategizing currency conversion and transaction fee management.",
+          "Identifying peak months for specific currencies can aid in financial forecasting and resource allocation."
+        ]
+      },
+      "recommendations": [
+        "Monitor currency trends to optimize currency conversion strategies.",
+        "Consider hedging strategies for currencies with high volatility.",
+        "Allocate resources to handle peak transaction months effectively."
+      ],
+      "followUpQuestions": [
+        "Are there any specific currencies that are more profitable due to lower transaction fees?",
+        "How do currency trends correlate with market events or promotions?",
+        "What are the implications of currency fluctuations on overall revenue?"
+      ],
+      "analysisOutput": "Loaded 21 rows with columns: ['currency_code', 'month', 'total_amount']\nAnalysis completed successfully!\n",
+      "generatedFiles": [
+        {
+          "filename": "currency_trends.png",
+          "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z/currency_trends.png",
+          "size": 46685,
+          "type": ".png"
+        }
+      ]
+    }
+  },
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T10:02:40.784Z",
+    "endTime": "2025-07-27T10:03:22.792Z",
+    "durationMs": 42008,
+    "durationSeconds": 42
+  }
+}
+[2025-07-27T10:03:22.793Z] SYSTEM: Console output saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/logs/console_cli_1753610560780_wr5efuwhw.log

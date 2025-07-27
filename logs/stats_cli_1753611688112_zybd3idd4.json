@@ -1,0 +1,31 @@
+{
+  "sessionId": "cli_1753611688112_zybd3idd4",
+  "userQuery": "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example:month: june, week : 1, AoV: 120",
+  "success": true,
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T10:21:28.113Z",
+    "endTime": "2025-07-27T10:21:54.366Z",
+    "durationMs": 26253,
+    "durationSeconds": 26
+  },
+  "summary": {
+    "totalQueries": 1,
+    "totalModelCalls": 2,
+    "modelBreakdown": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "totalRetries": 0,
+    "totalErrors": 0,
+    "duration": "26s",
+    "errorRate": "0.00%"
+  }
+}

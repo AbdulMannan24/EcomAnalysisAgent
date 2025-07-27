@@ -1,0 +1,137 @@
+[2025-07-27T09:35:03.484Z] LOG: [1m[36m
+🚀 E-commerce Analytics Agent CLI
+[0m
+[2025-07-27T09:35:03.486Z] LOG: [34m🔍 [INIT] Starting analytics agent initialization...[0m
+[2025-07-27T09:35:03.486Z] LOG: 🚀 Initializing Analytics Agent...
+[2025-07-27T09:35:08.927Z] LOG: 📊 Fetching database schemas...
+[2025-07-27T09:35:08.927Z] LOG: 📋 Processing 2 database(s): cortex_2_dimensions, cortex_3_facts
+[2025-07-27T09:35:08.927Z] LOG: 🔍 Processing database: cortex_2_dimensions
+[2025-07-27T09:35:09.527Z] LOG: 📋 Found 6 tables in cortex_2_dimensions
+[2025-07-27T09:35:09.694Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_attribution (11 columns)
+[2025-07-27T09:35:09.859Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_product (11 columns)
+[2025-07-27T09:35:10.025Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_session (9 columns)
+[2025-07-27T09:35:10.196Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_time (11 columns)
+[2025-07-27T09:35:10.362Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_user (8 columns)
+[2025-07-27T09:35:10.526Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_variant (11 columns)
+[2025-07-27T09:35:10.526Z] LOG: 🔍 Processing database: cortex_3_facts
+[2025-07-27T09:35:10.688Z] LOG: 📋 Found 3 tables in cortex_3_facts
+[2025-07-27T09:35:10.850Z] LOG: ✓ Cached schema for: cortex_3_facts.fct_page_views (6 columns)
+[2025-07-27T09:35:11.015Z] LOG: ✓ Cached schema for: cortex_3_facts.fct_sales (12 columns)
+[2025-07-27T09:35:11.176Z] LOG: ✓ Cached schema for: cortex_3_facts.fct_webhook_sales (10 columns)
+[2025-07-27T09:35:11.176Z] LOG: 📚 Cached 9 table schemas
+[2025-07-27T09:35:11.176Z] LOG: ✅ Analytics Agent initialized successfully
+[2025-07-27T09:35:11.176Z] LOG: [32m✅ Analytics agent initialized successfully[0m
+[2025-07-27T09:35:11.176Z] LOG: [36mℹ️  Cached 9 table schemas from databases[0m
+[2025-07-27T09:35:11.176Z] LOG: [2m
+📋 Available Tables:[0m
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_2_dimensions.dim_attribution[0m (11 columns)
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_2_dimensions.dim_product[0m (11 columns)
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_2_dimensions.dim_session[0m (9 columns)
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_2_dimensions.dim_time[0m (11 columns)
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_2_dimensions.dim_user[0m (8 columns)
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_2_dimensions.dim_variant[0m (11 columns)
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_3_facts.fct_page_views[0m (6 columns)
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_3_facts.fct_sales[0m (12 columns)
+[2025-07-27T09:35:11.176Z] LOG:    [36mcortex_3_facts.fct_webhook_sales[0m (10 columns)
+[2025-07-27T09:35:11.176Z] LOG: [33m
+💡 Type your analytics query, or use these commands:[0m
+[2025-07-27T09:35:11.176Z] LOG:    • help    - Show available commands
+[2025-07-27T09:35:11.176Z] LOG:    • tables  - List all available tables
+[2025-07-27T09:35:11.176Z] LOG:    • schema <table> - Show table schema
+[2025-07-27T09:35:11.176Z] LOG:    • exit    - Exit the CLI
+
+[2025-07-27T09:35:25.989Z] LOG: [33m
+🔍 Processing query: "Show me my top 10 best-selling products by revenue for the last 3 months"
+[0m
+[2025-07-27T09:35:25.989Z] LOG: [34m🔍 [VALIDATION] Validating query against database schemas...[0m
+[2025-07-27T09:35:25.989Z] LOG: [34m🔍 [PROCESSING] Starting analysis with session ID: cli_1753608925989_418r9pij5[0m
+[2025-07-27T09:35:25.994Z] LOG: 📝 Step 1: Validating query...
+[2025-07-27T09:35:25.995Z] LOG:    Query: "Show me my top 10 best-selling products by revenue for the last 3 months"
+[2025-07-27T09:35:32.676Z] LOG:    ✓ Validation result: Valid
+[2025-07-27T09:35:32.676Z] LOG:    📊 Required tables: cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_product
+[2025-07-27T09:35:32.676Z] LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T09:35:32.676Z] LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T09:35:32.676Z] LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T09:35:32.676Z] LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T09:35:32.677Z] LOG:    Columns (12):
+[2025-07-27T09:35:32.677Z] LOG:    - shop (String)
+[2025-07-27T09:35:32.677Z] LOG:    - hour_id (DateTime)
+[2025-07-27T09:35:32.677Z] LOG:    - customer_id (Int64)
+[2025-07-27T09:35:32.677Z] LOG:    - session_id (String)
+[2025-07-27T09:35:32.677Z] LOG:    - attribution_id (Nullable(String))
+[2025-07-27T09:35:32.677Z] LOG:    - order_id (String)
+[2025-07-27T09:35:32.677Z] LOG:    - product_id (Int64)
+[2025-07-27T09:35:32.677Z] LOG:    - variant_id (Int64)
+[2025-07-27T09:35:32.677Z] LOG:    - amount (Nullable(Float64))
+[2025-07-27T09:35:32.677Z] LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T09:35:32.677Z] LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T09:35:32.677Z] LOG:    - currency_code (String)
+[2025-07-27T09:35:32.677Z] LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T09:35:32.677Z] LOG:    Columns (10):
+[2025-07-27T09:35:32.677Z] LOG:    - shop (String)
+[2025-07-27T09:35:32.677Z] LOG:    - hour_id (DateTime)
+[2025-07-27T09:35:32.677Z] LOG:    - customer_id (Int64)
+[2025-07-27T09:35:32.677Z] LOG:    - order_id (Int64)
+[2025-07-27T09:35:32.677Z] LOG:    - product_id (Int64)
+[2025-07-27T09:35:32.677Z] LOG:    - variant_id (Int64)
+[2025-07-27T09:35:32.678Z] LOG:    - amount (Nullable(Float64))
+[2025-07-27T09:35:32.678Z] LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T09:35:32.678Z] LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T09:35:32.678Z] LOG:    - currency_code (String)
+[2025-07-27T09:35:32.678Z] LOG: 
+📋 Table: cortex_2_dimensions.dim_product
+[2025-07-27T09:35:32.678Z] LOG:    Columns (11):
+[2025-07-27T09:35:32.678Z] LOG:    - shop (LowCardinality(String))
+[2025-07-27T09:35:32.678Z] LOG:    - product_id (Int64)
+[2025-07-27T09:35:32.678Z] LOG:    - product_title (String)
+[2025-07-27T09:35:32.678Z] LOG:    - product_url (String)
+[2025-07-27T09:35:32.678Z] LOG:    - product_type (String)
+[2025-07-27T09:35:32.678Z] LOG:    - vendor (String)
+[2025-07-27T09:35:32.678Z] LOG:    - status (String)
+[2025-07-27T09:35:32.678Z] LOG:    - inventory (Nullable(UInt64))
+[2025-07-27T09:35:32.678Z] LOG:    - tags (Array(String))
+[2025-07-27T09:35:32.678Z] LOG:    - processed_at (DateTime)
+[2025-07-27T09:35:32.678Z] LOG:    - ingested_at (DateTime64(3))
+[2025-07-27T09:35:32.678Z] LOG: 
+
+[2025-07-27T09:35:36.236Z] LOG:    🔧 Generated SQL: SELECT CAST(s.product_id AS String) AS product_id, SUM(s.total_cost) AS total_revenue
+FROM cortex_3_facts.fct_sales AS s
+WHERE s.hour_id >= NOW() - toIntervalDay(90)
+ AND s.total_cost IS NOT NULL
+GROUP BY s.product_id
+ORDER BY total_revenue DESC
+LIMIT 10
+[2025-07-27T09:35:36.237Z] LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T09:35:36.238Z] LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T09:35:36.238Z] LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales"
+]
+[2025-07-27T09:35:36.238Z] LOG: Pre-validation issues found: 0
+[2025-07-27T09:35:36.238Z] LOG: 🔍 Executing query: SELECT CAST(s.product_id AS String) AS product_id, SUM(s.total_cost) AS total_revenue
+FROM cortex_3_facts.fct_sales AS s
+WHERE s.hour_id >= NOW() - toIntervalDay(90)
+ AND s.total_cost IS NOT NULL
+GROUP BY s.product_id
+ORDER BY total_revenue DESC
+LIMIT 10
+[2025-07-27T09:35:36.724Z] LOG: 💾 Saved query result: query_cli_1753608925989_418r9pij5_2025-07-27T09-35-36-723Z.json (10 rows, 1KB)
+[2025-07-27T09:35:36.724Z] LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753608925989_418r9pij5_2025-07-27T09-35-36-723Z.json
+[2025-07-27T09:35:36.725Z] LOG:    📊 Query returned: 10 rows
+[2025-07-27T09:35:36.725Z] LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T09:35:36.725Z] LOG: 📊 Using representative sample: 10 rows from 10 total
+[2025-07-27T09:35:36.726Z] LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T09:35:46.075Z] LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T09-35-46-073Z.json
+[2025-07-27T09:35:46.152Z] LOG: ✅ Generated Python script passed validation
+[2025-07-27T09:35:46.152Z] LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T09:35:46.183Z] LOG: 🐍 Executing Python analysis script...
+[2025-07-27T09:35:46.183Z] LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z.py
+[2025-07-27T09:35:46.183Z] LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z
+[2025-07-27T09:35:46.184Z] LOG: 📝 Starting Python script execution...
+[2025-07-27T09:35:47.871Z] LOG: 🐍 Python: Loaded 10 rows with columns: ['product_id', 'total_revenue']
+[2025-07-27T09:35:47.871Z] LOG: 🐍 Python: Analysis completed successfully!
+[2025-07-27T09:35:47.978Z] LOG: Python script exited with code 0
+[2025-07-27T09:35:47.978Z] LOG: 📊 Step 6: Compiling final response...

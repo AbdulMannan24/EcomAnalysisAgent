@@ -1,0 +1,473 @@
+[2025-07-27T09:35:25.990Z] SESSION_START: User Query: "Show me my top 10 best-selling products by revenue for the last 3 months"
+[2025-07-27T09:35:25.993Z] SYSTEM: Session ID: cli_1753608925989_418r9pij5
+[2025-07-27T09:35:25.994Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T09:35:25.994Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T09:35:25.995Z] CONSOLE_LOG:    Query: "Show me my top 10 best-selling products by revenue for the last 3 months"
+[2025-07-27T09:35:32.674Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 1967,
+  "responseLength": 1096,
+  "tokens": null,
+  "callNumber": 1
+}
+[2025-07-27T09:35:32.676Z] CONSOLE_LOG:    ✓ Validation result: Valid
+[2025-07-27T09:35:32.676Z] CONSOLE_LOG:    📊 Required tables: cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_product
+[2025-07-27T09:35:32.676Z] CONSOLE_LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T09:35:32.676Z] CONSOLE_LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T09:35:32.676Z] CONSOLE_LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T09:35:32.676Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    Columns (12):
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - attribution_id (Nullable(String))
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - session_id (String)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - order_id (String)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T09:35:32.677Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "session_id",
+      "type": "String"
+    },
+    {
+      "name": "attribution_id",
+      "type": "Nullable(String)"
+    },
+    {
+      "name": "order_id",
+      "type": "String"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    Columns (10):
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - order_id (Int64)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T09:35:32.677Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T09:35:32.678Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_webhook_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_webhook_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "order_id",
+      "type": "Int64"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    Columns (11):
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG: 
+📋 Table: cortex_2_dimensions.dim_product
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - shop (LowCardinality(String))
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - product_title (String)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - product_url (String)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - product_type (String)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - vendor (String)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - status (String)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - inventory (Nullable(UInt64))
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - tags (Array(String))
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - processed_at (DateTime)
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG:    - ingested_at (DateTime64(3))
+[2025-07-27T09:35:32.678Z] SCHEMA_DEBUG: Table cortex_2_dimensions.dim_product columns
+Data: {
+  "tableName": "cortex_2_dimensions.dim_product",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "LowCardinality(String)"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "product_title",
+      "type": "String"
+    },
+    {
+      "name": "product_url",
+      "type": "String"
+    },
+    {
+      "name": "product_type",
+      "type": "String"
+    },
+    {
+      "name": "vendor",
+      "type": "String"
+    },
+    {
+      "name": "status",
+      "type": "String"
+    },
+    {
+      "name": "inventory",
+      "type": "Nullable(UInt64)"
+    },
+    {
+      "name": "tags",
+      "type": "Array(String)"
+    },
+    {
+      "name": "processed_at",
+      "type": "DateTime"
+    },
+    {
+      "name": "ingested_at",
+      "type": "DateTime64(3)"
+    }
+  ]
+}
+[2025-07-27T09:35:32.678Z] CONSOLE_LOG: 
+
+[2025-07-27T09:35:36.236Z] CONSOLE_LOG:    🔧 Generated SQL: SELECT CAST(s.product_id AS String) AS product_id, SUM(s.total_cost) AS total_revenue
+FROM cortex_3_facts.fct_sales AS s
+WHERE s.hour_id >= NOW() - toIntervalDay(90)
+ AND s.total_cost IS NOT NULL
+GROUP BY s.product_id
+ORDER BY total_revenue DESC
+LIMIT 10
+[2025-07-27T09:35:36.238Z] CONSOLE_LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales"
+]
+[2025-07-27T09:35:36.238Z] CONSOLE_LOG: Pre-validation issues found: 0
+[2025-07-27T09:35:36.238Z] CONSOLE_LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T09:35:36.237Z] CONSOLE_LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T09:35:36.238Z] CONSOLE_LOG: 🔍 Executing query: SELECT CAST(s.product_id AS String) AS product_id, SUM(s.total_cost) AS total_revenue
+FROM cortex_3_facts.fct_sales AS s
+WHERE s.hour_id >= NOW() - toIntervalDay(90)
+ AND s.total_cost IS NOT NULL
+GROUP BY s.product_id
+ORDER BY total_revenue DESC
+LIMIT 10
+[2025-07-27T09:35:36.722Z] DATABASE_QUERY: Query SUCCESS
+Data: {
+  "query": "SELECT CAST(s.product_id AS String) AS product_id, SUM(s.total_cost) AS total_revenue\nFROM cortex_3_facts.fct_sales AS s\nWHERE s.hour_id >= NOW() - toIntervalDay(90)\n AND s.total_cost IS NOT NULL\nGROUP BY s.product_id\nORDER BY total_revenue DESC\nLIMIT 10",
+  "success": true,
+  "rowCount": 10,
+  "error": null,
+  "queryNumber": 1
+}
+[2025-07-27T09:35:36.724Z] CONSOLE_LOG: 💾 Saved query result: query_cli_1753608925989_418r9pij5_2025-07-27T09-35-36-723Z.json (10 rows, 1KB)
+[2025-07-27T09:35:36.725Z] CONSOLE_LOG:    📊 Query returned: 10 rows
+[2025-07-27T09:35:36.724Z] CONSOLE_LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753608925989_418r9pij5_2025-07-27T09-35-36-723Z.json
+[2025-07-27T09:35:36.725Z] CONSOLE_LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T09:35:36.726Z] CONSOLE_LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T09:35:36.725Z] CONSOLE_LOG: 📊 Using representative sample: 10 rows from 10 total
+[2025-07-27T09:35:46.075Z] CONSOLE_LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T09-35-46-073Z.json
+[2025-07-27T09:35:46.075Z] MODEL_CALL: Called gpt-4o
+Data: {
+  "model": "gpt-4o",
+  "promptLength": 3802,
+  "responseLength": 3547,
+  "tokens": null,
+  "callNumber": 2
+}
+[2025-07-27T09:35:46.152Z] CONSOLE_LOG: ✅ Generated Python script passed validation
+[2025-07-27T09:35:46.152Z] CONSOLE_LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T09:35:46.183Z] CONSOLE_LOG: 🐍 Executing Python analysis script...
+[2025-07-27T09:35:46.183Z] CONSOLE_LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z.py
+[2025-07-27T09:35:46.183Z] CONSOLE_LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z
+[2025-07-27T09:35:46.184Z] CONSOLE_LOG: 📝 Starting Python script execution...
+[2025-07-27T09:35:47.871Z] CONSOLE_LOG: 🐍 Python: Loaded 10 rows with columns: ['product_id', 'total_revenue']
+[2025-07-27T09:35:47.871Z] CONSOLE_LOG: 🐍 Python: Analysis completed successfully!
+[2025-07-27T09:35:47.978Z] CONSOLE_LOG: Python script exited with code 0
+[2025-07-27T09:35:47.978Z] PYTHON_SCRIPT: Python execution SUCCESS
+Data: {
+  "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z.py",
+  "success": true,
+  "output": "Loaded 10 rows with columns: ['product_id', 'total_revenue']\nAnalysis completed successfully!\n",
+  "error": ""
+}
+[2025-07-27T09:35:47.978Z] CONSOLE_LOG: 📊 Step 6: Compiling final response...
+[2025-07-27T09:35:47.978Z] SESSION_END: Session completed successfully
+Data: {
+  "success": true,
+  "finalData": {
+    "success": true,
+    "workflow": {
+      "step": 1,
+      "userQuery": "Show me my top 10 best-selling products by revenue for the last 3 months",
+      "sessionId": "cli_1753608925989_418r9pij5",
+      "timestamp": "2025-07-27T09:35:25.994Z",
+      "validation": {
+        "isValid": true,
+        "requiredTables": [
+          "cortex_3_facts.fct_sales",
+          "cortex_3_facts.fct_webhook_sales",
+          "cortex_2_dimensions.dim_product"
+        ],
+        "reason": "The query can be answered using the sales data from fct_sales and fct_webhook_sales to calculate revenue, and the product metadata from dim_product to get product details. The sales tables contain the necessary columns for product_id and amount, while dim_product provides product titles and other metadata.",
+        "suggestedApproach": "To approach this query, you can aggregate the sales data from both fct_sales and fct_webhook_sales for the last 3 months, calculating the total revenue for each product by multiplying the amount sold by the unit price. Then, join this aggregated data with dim_product on product_id to retrieve product details. Finally, sort the results by revenue and limit the output to the top 10 products.",
+        "columnMappings": {
+          "inventory": "dim_variant.inventory",
+          "sales": "fct_sales.amount or fct_webhook_sales.amount",
+          "revenue": "calculated from amount * unit_price"
+        }
+      },
+      "queryObj": {
+        "query": "SELECT CAST(s.product_id AS String) AS product_id, SUM(s.total_cost) AS total_revenue\nFROM cortex_3_facts.fct_sales AS s\nWHERE s.hour_id >= NOW() - toIntervalDay(90)\n AND s.total_cost IS NOT NULL\nGROUP BY s.product_id\nORDER BY total_revenue DESC\nLIMIT 10",
+        "explanation": "This query retrieves the top 10 best-selling products by revenue from the fct_sales table for the last 3 months. It sums the total_cost for each product, filters out any records with NULL total_cost, groups the results by product_id, orders them by total revenue in descending order, and limits the output to the top 10 products.",
+        "estimatedRows": 10,
+        "dataPreview": "The output will include the product_id and the corresponding total revenue for the top 10 products."
+      },
+      "queryResult": {
+        "success": true,
+        "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753608925989_418r9pij5_2025-07-27T09-35-36-723Z.json",
+        "filename": "query_cli_1753608925989_418r9pij5_2025-07-27T09-35-36-723Z.json",
+        "dataFile": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753608925989_418r9pij5_2025-07-27T09-35-36-723Z.json",
+        "rowCount": 10,
+        "dataSize": 1327,
+        "data": [
+          {
+            "product_id": "9761514389771",
+            "total_revenue": 9841.599999999991
+          },
+          {
+            "product_id": "8431711813900",
+            "total_revenue": 9097.980000000001
+          },
+          {
+            "product_id": "8817190633739",
+            "total_revenue": 7971.900000000003
+          },
+          {
+            "product_id": "8349989437707",
+            "total_revenue": 6745.2
+          },
+          {
+            "product_id": "9761513996555",
+            "total_revenue": 5588.800000000002
+          },
+          {
+            "product_id": "8817194893579",
+            "total_revenue": 4906.700000000002
+          },
+          {
+            "product_id": "8555677778188",
+            "total_revenue": 3881.6700000000064
+          },
+          {
+            "product_id": "8817193746699",
+            "total_revenue": 3300.4000000000015
+          },
+          {
+            "product_id": "3625626599504",
+            "total_revenue": 3006.16
+          },
+          {
+            "product_id": "8555621810444",
+            "total_revenue": 2743.800000000002
+          }
+        ]
+      },
+      "strategy": {
+        "analysisDecision": {
+          "shouldAnalyze": true,
+          "reasoning": "The query involves identifying the top 10 best-selling products by revenue over the last 3 months. Python analysis can help sort and visualize this data, providing clear insights into product performance and revenue distribution."
+        },
+        "insights": {
+          "immediate": [
+            "The product with ID '9761514389771' has the highest total revenue.",
+            "There is a significant drop in revenue from the top product to the tenth product."
+          ],
+          "statistical": [
+            "The mean revenue of the top 10 products is approximately 5708.72.",
+            "The standard deviation of revenue among these products is approximately 2700.12, indicating variability in sales performance."
+          ],
+          "business": [
+            "Focusing marketing efforts on the top-performing products could enhance revenue.",
+            "Consider strategies to boost sales for lower-performing products."
+          ]
+        },
+        "pythonScript": {
+          "description": "This script will sort the products by total revenue, identify the top 10 best-selling products, and generate a bar chart to visualize their performance.",
+          "code": "# Import necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport os\n\n# Sample data\ndata = [\n {\"product_id\": \"9761514389771\", \"total_revenue\": 9841.599999999991},\n {\"product_id\": \"8431711813900\", \"total_revenue\": 9097.980000000001},\n {\"product_id\": \"8817190633739\", \"total_revenue\": 7971.900000000003},\n {\"product_id\": \"8349989437707\", \"total_revenue\": 6745.2},\n {\"product_id\": \"9761513996555\", \"total_revenue\": 5588.800000000002},\n {\"product_id\": \"8817194893579\", \"total_revenue\": 4906.700000000002},\n {\"product_id\": \"8555677778188\", \"total_revenue\": 3881.6700000000064},\n {\"product_id\": \"8817193746699\", \"total_revenue\": 3300.4000000000015},\n {\"product_id\": \"3625626599504\", \"total_revenue\": 3006.16},\n {\"product_id\": \"8555621810444\", \"total_revenue\": 2743.800000000002}\n]\n\n# Create a DataFrame\ndf = pd.DataFrame(data)\n\n# Sort the DataFrame by total_revenue in descending order\ndf_sorted = df.sort_values(by='total_revenue', ascending=False)\n\n# Select the top 10 products\ntop_10_products = df_sorted.head(10)\n\n# Plotting\nplt.figure(figsize=(10, 6))\nplt.bar(top_10_products['product_id'], top_10_products['total_revenue'], color='skyblue')\nplt.xlabel('Product ID')\nplt.ylabel('Total Revenue')\nplt.title('Top 10 Best-Selling Products by Revenue')\nplt.xticks(rotation=45, ha='right')\nplt.tight_layout()\n\n# Save the plot\noutput_dir = '.' # Change this to your desired output directory\noutput_file = os.path.join(output_dir, 'top_10_best_selling_products.png')\nplt.savefig(output_file)\nplt.close()\n\n# Output the sorted DataFrame to a CSV file\ncsv_output_file = os.path.join(output_dir, 'top_10_best_selling_products.csv')\ntop_10_products.to_csv(csv_output_file, index=False)\n",
+          "outputFiles": [
+            "top_10_best_selling_products.png",
+            "top_10_best_selling_products.csv"
+          ],
+          "skipAnalysis": false,
+          "missingDependencies": []
+        },
+        "recommendations": [
+          "Enhance marketing strategies for the top 3 products to maximize revenue.",
+          "Investigate the reasons behind lower sales for the bottom products and consider promotional activities."
+        ],
+        "followUpQuestions": [
+          "What factors contribute to the high sales of the top products?",
+          "Are there seasonal trends affecting product sales?"
+        ]
+      },
+      "analysisResult": {
+        "success": true,
+        "output": "Loaded 10 rows with columns: ['product_id', 'total_revenue']\nAnalysis completed successfully!\n",
+        "error": null,
+        "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z.py",
+        "outputDir": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z",
+        "outputFiles": [
+          {
+            "filename": "top_10_best_selling_products.csv",
+            "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z/top_10_best_selling_products.csv",
+            "size": 326,
+            "type": ".csv"
+          },
+          {
+            "filename": "top_10_best_selling_products.png",
+            "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z/top_10_best_selling_products.png",
+            "size": 39714,
+            "type": ".png"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "dataProcessed": "10 rows (1KB)",
+      "query": "SELECT CAST(s.product_id AS String) AS product_id, SUM(s.total_cost) AS total_revenue\nFROM cortex_3_facts.fct_sales AS s\nWHERE s.hour_id >= NOW() - toIntervalDay(90)\n AND s.total_cost IS NOT NULL\nGROUP BY s.product_id\nORDER BY total_revenue DESC\nLIMIT 10",
+      "insights": {
+        "immediate": [
+          "The product with ID '9761514389771' has the highest total revenue.",
+          "There is a significant drop in revenue from the top product to the tenth product."
+        ],
+        "statistical": [
+          "The mean revenue of the top 10 products is approximately 5708.72.",
+          "The standard deviation of revenue among these products is approximately 2700.12, indicating variability in sales performance."
+        ],
+        "business": [
+          "Focusing marketing efforts on the top-performing products could enhance revenue.",
+          "Consider strategies to boost sales for lower-performing products."
+        ]
+      },
+      "recommendations": [
+        "Enhance marketing strategies for the top 3 products to maximize revenue.",
+        "Investigate the reasons behind lower sales for the bottom products and consider promotional activities."
+      ],
+      "followUpQuestions": [
+        "What factors contribute to the high sales of the top products?",
+        "Are there seasonal trends affecting product sales?"
+      ],
+      "analysisOutput": "Loaded 10 rows with columns: ['product_id', 'total_revenue']\nAnalysis completed successfully!\n",
+      "generatedFiles": [
+        {
+          "filename": "top_10_best_selling_products.csv",
+          "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z/top_10_best_selling_products.csv",
+          "size": 326,
+          "type": ".csv"
+        },
+        {
+          "filename": "top_10_best_selling_products.png",
+          "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753608925989_418r9pij5_2025-07-27T09-35-46-152Z/top_10_best_selling_products.png",
+          "size": 39714,
+          "type": ".png"
+        }
+      ]
+    }
+  },
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T09:35:25.990Z",
+    "endTime": "2025-07-27T09:35:47.978Z",
+    "durationMs": 21988,
+    "durationSeconds": 22
+  }
+}
+[2025-07-27T09:35:47.979Z] SYSTEM: Console output saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/logs/console_cli_1753608925989_418r9pij5.log

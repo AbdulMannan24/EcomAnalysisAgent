@@ -1,0 +1,114 @@
+{
+  "timestamp": "2025-07-27T10-02-54-660Z",
+  "userQuery": "This query retrieves all unique currencies used for payments and calculates the total amount received for each currency, grouped by month, for the last 6 months. It combines data from both sales tables, ensuring that only non-null amounts are considered.",
+  "sqlQuery": "SELECT currency_code, toStartOfMonth(hour_id) AS month, SUM(amount) AS total_amount FROM (SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL UNION ALL SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_webhook_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL) GROUP BY currency_code, month ORDER BY month, currency_code LIMIT 10000",
+  "rowCount": 21,
+  "dataSize": 1342,
+  "data": [
+    {
+      "currency_code": "EUR",
+      "month": "2025-01-01",
+      "total_amount": 7499
+    },
+    {
+      "currency_code": "EUR",
+      "month": "2025-02-01",
+      "total_amount": 42230
+    },
+    {
+      "currency_code": "CHF",
+      "month": "2025-03-01",
+      "total_amount": 34
+    },
+    {
+      "currency_code": "DKK",
+      "month": "2025-03-01",
+      "total_amount": 2
+    },
+    {
+      "currency_code": "EUR",
+      "month": "2025-03-01",
+      "total_amount": 41379
+    },
+    {
+      "currency_code": "GBP",
+      "month": "2025-03-01",
+      "total_amount": 2
+    },
+    {
+      "currency_code": "CHF",
+      "month": "2025-04-01",
+      "total_amount": 396
+    },
+    {
+      "currency_code": "CZK",
+      "month": "2025-04-01",
+      "total_amount": 1
+    },
+    {
+      "currency_code": "DKK",
+      "month": "2025-04-01",
+      "total_amount": 1
+    },
+    {
+      "currency_code": "EUR",
+      "month": "2025-04-01",
+      "total_amount": 43269
+    },
+    {
+      "currency_code": "GBP",
+      "month": "2025-04-01",
+      "total_amount": 705
+    },
+    {
+      "currency_code": "PLN",
+      "month": "2025-04-01",
+      "total_amount": 2
+    },
+    {
+      "currency_code": "XOF",
+      "month": "2025-04-01",
+      "total_amount": 2
+    },
+    {
+      "currency_code": "CHF",
+      "month": "2025-05-01",
+      "total_amount": 26
+    },
+    {
+      "currency_code": "EUR",
+      "month": "2025-05-01",
+      "total_amount": 11475
+    },
+    {
+      "currency_code": "GBP",
+      "month": "2025-05-01",
+      "total_amount": 433
+    },
+    {
+      "currency_code": "USD",
+      "month": "2025-05-01",
+      "total_amount": 1
+    },
+    {
+      "currency_code": "EUR",
+      "month": "2025-06-01",
+      "total_amount": 63302
+    },
+    {
+      "currency_code": "GBP",
+      "month": "2025-06-01",
+      "total_amount": 480
+    },
+    {
+      "currency_code": "EUR",
+      "month": "2025-07-01",
+      "total_amount": 58027
+    },
+    {
+      "currency_code": "GBP",
+      "month": "2025-07-01",
+      "total_amount": 184
+    }
+  ]
+}

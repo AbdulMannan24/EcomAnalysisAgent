@@ -1,0 +1,31 @@
+{
+  "sessionId": "cli_1753610560780_wr5efuwhw",
+  "userQuery": "can you find all the unique currencies users paid with, also calculate the total amount we received each month for the each currency for the last 6 months",
+  "success": true,
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T10:02:40.784Z",
+    "endTime": "2025-07-27T10:03:22.792Z",
+    "durationMs": 42008,
+    "durationSeconds": 42
+  },
+  "summary": {
+    "totalQueries": 1,
+    "totalModelCalls": 2,
+    "modelBreakdown": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "totalRetries": 0,
+    "totalErrors": 0,
+    "duration": "42s",
+    "errorRate": "0.00%"
+  }
+}

@@ -1,0 +1,134 @@
+[2025-07-27T09:37:09.531Z] LOG: [32m✅ Query processed successfully![0m
+[2025-07-27T09:37:09.531Z] LOG: [36m
+📊 Analysis Results:
+[0m
+[2025-07-27T09:37:09.531Z] LOG: [1m🔧 Generated SQL Query:[0m
+[2025-07-27T09:37:09.531Z] LOG: [2m SELECT p.product_id, p.product_title, p.product_url, p.product_type, p.vendor, SUM(COALESCE(s.total_cost, 0)) AS total_revenue FROM cortex_3_facts.fct_sales AS s JOIN cortex_2_dimensions.dim_product AS p ON CAST(s.product_id AS String) = CAST(p.product_id AS String) WHERE s.hour_id >= NOW() - INTERVAL 3 MONTH GROUP BY p.product_id, p.product_title, p.product_url, p.product_type, p.vendor ORDER BY total_revenue DESC LIMIT 10 [0m
+
+[2025-07-27T09:37:09.531Z] LOG: [1m📊 Data Summary:[0m
+[2025-07-27T09:37:09.531Z] LOG: 10 rows (4KB)
+
+[2025-07-27T09:37:09.531Z] LOG: [1m📋 Sample Results (first 5 rows):[0m
+[2025-07-27T09:37:09.535Z] LOG: ┌─────────┬──────────────────┬───────────────────────────────────────────────────────────┬───────────────────────────────────────────────────────────────────────────────────────┬───────────────────┬───────────────┬────────────────────┐
+│ (index) │ p.product_id     │ product_title                                             │ product_url                                                                           │ product_type      │ vendor        │ total_revenue      │
+├─────────┼──────────────────┼───────────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────────────────────┼───────────────────┼───────────────┼────────────────────┤
+│ 0       │ [32m'8431711813900'[39m  │ [32m'SAMYANG Instant Nudeln Hot Chicken Carbonara 130g'[39m       │ [32m'https://mao-mao.de/products/samyang-instant-ramen-hot-chicken-carbonara-130g'[39m        │ [32m'Hot Deal'[39m        │ [32m'Samyang'[39m     │ [33m9358.74[39m            │
+│ 1       │ [32m'8555677778188'[39m  │ [32m'SAMYANG Instant Nudeln Hot Chicken Cream Carbonara 140g'[39m │ [32m'https://mao-mao.de/products/samyang-instant-nudeln-hot-chicken-cream-carbonara-140g'[39m │ [32m'NOTONSALE'[39m       │ [32m'Samyang'[39m     │ [33m4043.070000000009[39m  │
+│ 2       │ [32m'8555621810444'[39m  │ [32m'SAMYANG Instant Nudeln Hot Chicken Quattro 4-Käse 145g'[39m  │ [32m'https://mao-mao.de/products/samyang-instant-nudeln-hot-chicken-quattro-cheese-145g'[39m  │ [32m'NOTONSALE'[39m       │ [32m'Samyang'[39m     │ [33m2880.9900000000043[39m │
+│ 3       │ [32m'8384273809676'[39m  │ [32m'SAMYANG Instant Nudeln Hot Chicken Käse 140g'[39m            │ [32m'https://mao-mao.de/products/samyang-hot-chicken-cheese-flavor-ramen-140g'[39m            │ [32m'NOTONSALE'[39m       │ [32m'Samyang'[39m     │ [33m2394.6299999999983[39m │
+│ 4       │ [32m'11547050574092'[39m │ [32m'YOUNG POONG YOPOKKI Tteokbokki Käse 120g'[39m                │ [32m'https://mao-mao.de/products/young-poong-yopokki-tteokbokki-kase-120g'[39m                │ [32m'Instant Noodles'[39m │ [32m'Young Poong'[39m │ [33m2308.87[39m            │
+└─────────┴──────────────────┴───────────────────────────────────────────────────────────┴───────────────────────────────────────────────────────────────────────────────────────┴───────────────────┴───────────────┴────────────────────┘
+[2025-07-27T09:37:09.535Z] LOG: 
+[2025-07-27T09:37:09.535Z] LOG: [1m💡 Key Insights:[0m
+[2025-07-27T09:37:09.535Z] LOG: 1. The top-selling product by revenue is 'SAMYANG Instant Nudeln Hot Chicken Carbonara 130g'.
+[2025-07-27T09:37:09.535Z] LOG: 2. Samyang is a dominant vendor in the top-selling products list.
+[2025-07-27T09:37:09.535Z] LOG: 
+[2025-07-27T09:37:09.535Z] LOG: [1m🏢 Business Insights:[0m
+[2025-07-27T09:37:09.535Z] LOG: 1. Focusing on the top-selling products can optimize inventory and marketing strategies.
+[2025-07-27T09:37:09.535Z] LOG: 2. Samyang products are popular, suggesting potential for expanding the product line or promotional activities.
+[2025-07-27T09:37:09.535Z] LOG: 
+[2025-07-27T09:37:09.535Z] LOG: [1m📈 Statistical Insights:[0m
+[2025-07-27T09:37:09.535Z] LOG: 1. The total revenue for the top 10 products shows a significant skew towards the top few products.
+[2025-07-27T09:37:09.535Z] LOG: 2. There is a noticeable drop in revenue after the top 3 products.
+[2025-07-27T09:37:09.535Z] LOG: 
+[2025-07-27T09:37:09.535Z] LOG: [1m🎯 Recommendations:[0m
+[2025-07-27T09:37:09.535Z] LOG: 1. Consider increasing stock levels for the top-selling products to meet demand.
+[2025-07-27T09:37:09.535Z] LOG: 2. Explore marketing campaigns focused on Samyang products to leverage their popularity.
+[2025-07-27T09:37:09.535Z] LOG: 3. Analyze customer feedback on these products to identify potential improvements or new product opportunities.
+[2025-07-27T09:37:09.535Z] LOG: 
+[2025-07-27T09:37:09.535Z] LOG: [1m❓ Follow-up Questions:[0m
+[2025-07-27T09:37:09.535Z] LOG: 1. What are the sales trends for these products over a longer period?
+[2025-07-27T09:37:09.535Z] LOG: 2. How do these products perform in different regions or sales channels?
+[2025-07-27T09:37:09.535Z] LOG: 3. What is the customer demographic for these top-selling products?
+[2025-07-27T09:37:09.535Z] LOG: 
+[2025-07-27T09:37:09.535Z] LOG: [1m🔬 Analysis Output:[0m
+[2025-07-27T09:37:09.535Z] LOG: Loaded 10 rows with columns: ['p.product_id', 'product_title', 'product_url', 'product_type', 'vendor', 'total_revenue']
+Analysis completed successfully!
+
+
+[2025-07-27T09:37:09.535Z] LOG: [36mℹ️  Query results saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753608977925_819g5q6l2_2025-07-27T09-36-30-052Z.json[0m
+[2025-07-27T09:37:09.535Z] LOG: [36mℹ️  Generated files: [object Object], [object Object][0m
+[2025-07-27T10:02:40.777Z] LOG: [33m
+🔍 Processing query: "can you find all the unique currencies users paid with, also calculate the total amount we received each month for the each currency for the last 6 months"
+[0m
+[2025-07-27T10:02:40.779Z] LOG: [34m🔍 [VALIDATION] Validating query against database schemas...[0m
+[2025-07-27T10:02:40.780Z] LOG: [34m🔍 [PROCESSING] Starting analysis with session ID: cli_1753610560780_wr5efuwhw[0m
+[2025-07-27T10:02:40.786Z] LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:02:40.786Z] LOG:    Query: "can you find all the unique currencies users paid with, also calculate the total amount we received each month for the each currency for the last 6 months"
+[2025-07-27T10:02:47.871Z] LOG:    ✓ Validation result: Valid
+[2025-07-27T10:02:47.871Z] LOG:    📊 Required tables: cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_time
+[2025-07-27T10:02:47.871Z] LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T10:02:47.871Z] LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T10:02:47.871Z] LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T10:02:47.871Z] LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T10:02:47.871Z] LOG:    Columns (12):
+[2025-07-27T10:02:47.871Z] LOG:    - shop (String)
+[2025-07-27T10:02:47.871Z] LOG:    - hour_id (DateTime)
+[2025-07-27T10:02:47.871Z] LOG:    - customer_id (Int64)
+[2025-07-27T10:02:47.871Z] LOG:    - session_id (String)
+[2025-07-27T10:02:47.871Z] LOG:    - attribution_id (Nullable(String))
+[2025-07-27T10:02:47.871Z] LOG:    - order_id (String)
+[2025-07-27T10:02:47.871Z] LOG:    - product_id (Int64)
+[2025-07-27T10:02:47.871Z] LOG:    - variant_id (Int64)
+[2025-07-27T10:02:47.871Z] LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:02:47.871Z] LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] LOG:    - currency_code (String)
+[2025-07-27T10:02:47.872Z] LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T10:02:47.872Z] LOG:    Columns (10):
+[2025-07-27T10:02:47.872Z] LOG:    - shop (String)
+[2025-07-27T10:02:47.872Z] LOG:    - hour_id (DateTime)
+[2025-07-27T10:02:47.872Z] LOG:    - customer_id (Int64)
+[2025-07-27T10:02:47.872Z] LOG:    - order_id (Int64)
+[2025-07-27T10:02:47.872Z] LOG:    - product_id (Int64)
+[2025-07-27T10:02:47.872Z] LOG:    - variant_id (Int64)
+[2025-07-27T10:02:47.872Z] LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:02:47.872Z] LOG:    - currency_code (String)
+[2025-07-27T10:02:47.872Z] LOG: 
+📋 Table: cortex_2_dimensions.dim_time
+[2025-07-27T10:02:47.872Z] LOG:    Columns (11):
+[2025-07-27T10:02:47.872Z] LOG:    - hour_id (DateTime)
+[2025-07-27T10:02:47.872Z] LOG:    - date_id (Date)
+[2025-07-27T10:02:47.872Z] LOG:    - day_of_week (UInt8)
+[2025-07-27T10:02:47.873Z] LOG:    - day_name (String)
+[2025-07-27T10:02:47.873Z] LOG:    - day_of_month (UInt8)
+[2025-07-27T10:02:47.873Z] LOG:    - week_of_year (UInt8)
+[2025-07-27T10:02:47.873Z] LOG:    - month (UInt8)
+[2025-07-27T10:02:47.873Z] LOG:    - month_name (String)
+[2025-07-27T10:02:47.873Z] LOG:    - quarter (UInt8)
+[2025-07-27T10:02:47.873Z] LOG:    - year (UInt16)
+[2025-07-27T10:02:47.873Z] LOG:    - is_weekend (UInt8)
+[2025-07-27T10:02:47.873Z] LOG: 
+
+[2025-07-27T10:02:54.095Z] LOG:    🔧 Generated SQL: SELECT currency_code, toStartOfMonth(hour_id) AS month, SUM(amount) AS total_amount FROM (SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL UNION ALL SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_webhook_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL) GROUP BY currency_code, month ORDER BY month, currency_code LIMIT 10000
+[2025-07-27T10:02:54.095Z] LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T10:02:54.095Z] LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T10:02:54.096Z] LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales",
+  "FROM cortex_3_facts.fct_webhook_sales"
+]
+[2025-07-27T10:02:54.096Z] LOG: Pre-validation issues found: 0
+[2025-07-27T10:02:54.096Z] LOG: 🔍 Executing query: SELECT currency_code, toStartOfMonth(hour_id) AS month, SUM(amount) AS total_amount FROM (SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL UNION ALL SELECT currency_code, hour_id, amount FROM cortex_3_facts.fct_webhook_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL) GROUP BY currency_code, month ORDER BY month, currency_code LIMIT 10000
+[2025-07-27T10:02:54.662Z] LOG: 💾 Saved query result: query_cli_1753610560780_wr5efuwhw_2025-07-27T10-02-54-660Z.json (21 rows, 2KB)
+[2025-07-27T10:02:54.662Z] LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753610560780_wr5efuwhw_2025-07-27T10-02-54-660Z.json
+[2025-07-27T10:02:54.662Z] LOG:    📊 Query returned: 21 rows
+[2025-07-27T10:02:54.662Z] LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T10:02:54.662Z] LOG: 📊 Using representative sample: 21 rows from 21 total
+[2025-07-27T10:02:54.662Z] LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T10:03:07.594Z] LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T10-03-07-592Z.json
+[2025-07-27T10:03:07.677Z] LOG: ✅ Generated Python script passed validation
+[2025-07-27T10:03:07.677Z] LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T10:03:07.706Z] LOG: 🐍 Executing Python analysis script...
+[2025-07-27T10:03:07.706Z] LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z.py
+[2025-07-27T10:03:07.706Z] LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753610560780_wr5efuwhw_2025-07-27T10-03-07-677Z
+[2025-07-27T10:03:07.706Z] LOG: 📝 Starting Python script execution...
+[2025-07-27T10:03:22.691Z] LOG: 🐍 Python: Loaded 21 rows with columns: ['currency_code', 'month', 'total_amount']
+[2025-07-27T10:03:22.691Z] LOG: 🐍 Python: Analysis completed successfully!
+[2025-07-27T10:03:22.791Z] LOG: Python script exited with code 0
+[2025-07-27T10:03:22.792Z] LOG: 📊 Step 6: Compiling final response...

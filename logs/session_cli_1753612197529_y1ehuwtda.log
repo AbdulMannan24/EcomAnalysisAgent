@@ -1,0 +1,514 @@
+[2025-07-27T10:29:57.530Z] SESSION_START: User Query: "can you give me the Average Order value for the past 30 days, you need to give me the date wise data for this"
+[2025-07-27T10:29:57.534Z] SYSTEM: Session ID: cli_1753612197529_y1ehuwtda
+[2025-07-27T10:29:57.534Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T10:29:57.535Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:29:57.535Z] CONSOLE_LOG:    Query: "can you give me the Average Order value for the past 30 days, you need to give me the date wise data for this"
+[2025-07-27T10:30:02.058Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 2004,
+  "responseLength": 899,
+  "tokens": null,
+  "callNumber": 1
+}
+[2025-07-27T10:30:02.060Z] CONSOLE_LOG:    ✓ Validation result: Valid
+[2025-07-27T10:30:02.060Z] CONSOLE_LOG:    📊 Required tables: cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_time
+[2025-07-27T10:30:02.060Z] CONSOLE_LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T10:30:02.060Z] CONSOLE_LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    Columns (12):
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - session_id (String)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - attribution_id (Nullable(String))
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - order_id (String)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:30:02.061Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "session_id",
+      "type": "String"
+    },
+    {
+      "name": "attribution_id",
+      "type": "Nullable(String)"
+    },
+    {
+      "name": "order_id",
+      "type": "String"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    Columns (10):
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:30:02.061Z] CONSOLE_LOG:    - order_id (Int64)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:30:02.062Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_webhook_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_webhook_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "order_id",
+      "type": "Int64"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG: 
+📋 Table: cortex_2_dimensions.dim_time
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    Columns (11):
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - date_id (Date)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - day_of_week (UInt8)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - day_name (String)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - day_of_month (UInt8)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - week_of_year (UInt8)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - month (UInt8)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - month_name (String)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - quarter (UInt8)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - year (UInt16)
+[2025-07-27T10:30:02.062Z] CONSOLE_LOG:    - is_weekend (UInt8)
+[2025-07-27T10:30:02.062Z] SCHEMA_DEBUG: Table cortex_2_dimensions.dim_time columns
+Data: {
+  "tableName": "cortex_2_dimensions.dim_time",
+  "columns": [
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "date_id",
+      "type": "Date"
+    },
+    {
+      "name": "day_of_week",
+      "type": "UInt8"
+    },
+    {
+      "name": "day_name",
+      "type": "String"
+    },
+    {
+      "name": "day_of_month",
+      "type": "UInt8"
+    },
+    {
+      "name": "week_of_year",
+      "type": "UInt8"
+    },
+    {
+      "name": "month",
+      "type": "UInt8"
+    },
+    {
+      "name": "month_name",
+      "type": "String"
+    },
+    {
+      "name": "quarter",
+      "type": "UInt8"
+    },
+    {
+      "name": "year",
+      "type": "UInt16"
+    },
+    {
+      "name": "is_weekend",
+      "type": "UInt8"
+    }
+  ]
+}
+[2025-07-27T10:30:02.063Z] CONSOLE_LOG: 
+
+[2025-07-27T10:30:06.539Z] CONSOLE_LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T10:30:06.541Z] CONSOLE_LOG: Pre-validation issues found: 2
+[2025-07-27T10:30:06.539Z] CONSOLE_LOG:    🔧 Generated SQL: SELECT dt.date_id, AVG(toFloat64OrNull(s.amount)) AS average_order_value
+FROM cortex_3_facts.fct_sales AS s
+JOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id
+WHERE s.hour_id >= NOW() - toIntervalDay(30)
+AND s.order_id IS NOT NULL
+GROUP BY dt.date_id
+ORDER BY dt.date_id ASC
+LIMIT 10000
+[2025-07-27T10:30:06.540Z] CONSOLE_LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T10:30:06.540Z] CONSOLE_LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales",
+  "JOIN cortex_2_dimensions.dim_time"
+]
+[2025-07-27T10:30:06.541Z] CONSOLE_LOG: ⚠️  Pre-execution validation found issues: [
+  "WARNING: toFloat64OrNull applied to cortex_3_facts.fct_sales.amount which is already Nullable(Float64)",
+  "WARNING: toFloat64OrNull applied to cortex_3_facts.fct_webhook_sales.amount which is already Nullable(Float64)"
+]
+[2025-07-27T10:30:06.541Z] CONSOLE_LOG: 🔍 Executing query: SELECT dt.date_id, AVG(toFloat64OrNull(s.amount)) AS average_order_value
+FROM cortex_3_facts.fct_sales AS s
+JOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id
+WHERE s.hour_id >= NOW() - toIntervalDay(30)
+AND s.order_id IS NOT NULL
+GROUP BY dt.date_id
+ORDER BY dt.date_id ASC
+LIMIT 10000
+[2025-07-27T10:30:06.991Z] DATABASE_QUERY: Query FAILED
+Data: {
+  "query": "SELECT dt.date_id, AVG(toFloat64OrNull(s.amount)) AS average_order_value\nFROM cortex_3_facts.fct_sales AS s\nJOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id\nWHERE s.hour_id >= NOW() - toIntervalDay(30)\nAND s.order_id IS NOT NULL\nGROUP BY dt.date_id\nORDER BY dt.date_id ASC\nLIMIT 10000",
+  "success": false,
+  "rowCount": 0,
+  "error": "Illegal type Float64 of first argument of function toFloat64OrNull. Conversion functions with postfix 'OrZero' or 'OrNull' should take String argument: In scope SELECT dt.date_id, AVG(toFloat64OrNull(s.amount)) AS average_order_value FROM cortex_3_facts.fct_sales AS s INNER JOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id WHERE (s.hour_id >= (NOW() - toIntervalDay(30))) AND (s.order_id IS NOT NULL) GROUP BY dt.date_id ORDER BY dt.date_id ASC LIMIT 10000. ",
+  "queryNumber": 1
+}
+[2025-07-27T10:30:06.992Z] CONSOLE_LOG: ⚠️  Query failed with retryable error: Illegal type Float64 of first argument of function toFloat64OrNull. Conversion functions with postfix 'OrZero' or 'OrNull' should take String argument: In scope SELECT dt.date_id, AVG(toFloat64OrNull(s.amount)) AS average_order_value FROM cortex_3_facts.fct_sales AS s INNER JOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id WHERE (s.hour_id >= (NOW() - toIntervalDay(30))) AND (s.order_id IS NOT NULL) GROUP BY dt.date_id ORDER BY dt.date_id ASC LIMIT 10000. 
+[2025-07-27T10:30:06.992Z] CONSOLE_LOG: 🔄 Attempting to fix and retry...
+[2025-07-27T10:30:08.895Z] RETRY: SQL_QUERY retry attempt 1
+Data: {
+  "type": "SQL_QUERY",
+  "attempt": 1,
+  "reason": "Illegal type Float64 of first argument of function toFloat64OrNull. Conversion functions with postfix 'OrZero' or 'OrNull' should take String argument: In scope SELECT dt.date_id, AVG(toFloat64OrNull(s.amount)) AS average_order_value FROM cortex_3_facts.fct_sales AS s INNER JOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id WHERE (s.hour_id >= (NOW() - toIntervalDay(30))) AND (s.order_id IS NOT NULL) GROUP BY dt.date_id ORDER BY dt.date_id ASC LIMIT 10000. ",
+  "success": true,
+  "totalRetries": 1
+}
+[2025-07-27T10:30:08.896Z] CONSOLE_LOG: ✨ Generated fixed query, retrying...
+[2025-07-27T10:30:08.896Z] CONSOLE_LOG: 📝 Fix explanation: Type conversion error - column is already Float64, remove toFloat64OrNull() and use column directly
+[2025-07-27T10:30:08.896Z] CONSOLE_LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales",
+  "JOIN cortex_2_dimensions.dim_time"
+]
+[2025-07-27T10:30:08.897Z] CONSOLE_LOG: Pre-validation issues found: 0
+[2025-07-27T10:30:08.896Z] CONSOLE_LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T10:30:08.897Z] CONSOLE_LOG: 🔍 Executing query: SELECT dt.date_id, AVG(s.amount) AS average_order_value
+FROM cortex_3_facts.fct_sales AS s
+JOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id
+WHERE s.hour_id >= NOW() - toIntervalDay(30)
+AND s.order_id IS NOT NULL
+GROUP BY dt.date_id
+ORDER BY dt.date_id ASC
+LIMIT 10000
+[2025-07-27T10:30:09.102Z] DATABASE_QUERY: Query SUCCESS
+Data: {
+  "query": "SELECT dt.date_id, AVG(s.amount) AS average_order_value\nFROM cortex_3_facts.fct_sales AS s\nJOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id\nWHERE s.hour_id >= NOW() - toIntervalDay(30)\nAND s.order_id IS NOT NULL\nGROUP BY dt.date_id\nORDER BY dt.date_id ASC\nLIMIT 10000",
+  "success": true,
+  "rowCount": 15,
+  "error": null,
+  "queryNumber": 2
+}
+[2025-07-27T10:30:09.104Z] CONSOLE_LOG: 💾 Saved query result: query_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-09-103Z.json (15 rows, 2KB)
+[2025-07-27T10:30:09.104Z] CONSOLE_LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-09-103Z.json
+[2025-07-27T10:30:09.105Z] CONSOLE_LOG:    📊 Query returned: 15 rows
+[2025-07-27T10:30:09.105Z] CONSOLE_LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T10:30:09.105Z] CONSOLE_LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T10:30:09.105Z] CONSOLE_LOG: 📊 Using representative sample: 15 rows from 15 total
+[2025-07-27T10:30:18.559Z] CONSOLE_LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T10-30-18-558Z.json
+[2025-07-27T10:30:18.559Z] MODEL_CALL: Called gpt-4o
+Data: {
+  "model": "gpt-4o",
+  "promptLength": 4279,
+  "responseLength": 4169,
+  "tokens": null,
+  "callNumber": 2
+}
+[2025-07-27T10:30:18.639Z] CONSOLE_LOG: ✅ Generated Python script passed validation
+[2025-07-27T10:30:18.639Z] CONSOLE_LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T10:30:18.677Z] CONSOLE_LOG: 🐍 Executing Python analysis script...
+[2025-07-27T10:30:18.677Z] CONSOLE_LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-18-639Z.py
+[2025-07-27T10:30:18.677Z] CONSOLE_LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-18-639Z
+[2025-07-27T10:30:18.677Z] CONSOLE_LOG: 📝 Starting Python script execution...
+[2025-07-27T10:31:18.720Z] CONSOLE_LOG: Python script exited with code null
+[2025-07-27T10:31:18.722Z] PYTHON_SCRIPT: Python execution FAILED
+Data: {
+  "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-18-639Z.py",
+  "success": false,
+  "output": "",
+  "error": ""
+}
+[2025-07-27T10:31:18.726Z] CONSOLE_LOG: 📊 Step 6: Compiling final response...
+[2025-07-27T10:31:18.727Z] SESSION_END: Session completed successfully
+Data: {
+  "success": true,
+  "finalData": {
+    "success": true,
+    "workflow": {
+      "step": 1,
+      "userQuery": "can you give me the Average Order value for the past 30 days, you need to give me the date wise data for this",
+      "sessionId": "cli_1753612197529_y1ehuwtda",
+      "timestamp": "2025-07-27T10:29:57.534Z",
+      "validation": {
+        "isValid": true,
+        "requiredTables": [
+          "cortex_3_facts.fct_sales",
+          "cortex_3_facts.fct_webhook_sales",
+          "cortex_2_dimensions.dim_time"
+        ],
+        "reason": "The query can be answered using the 'amount' column from the sales tables (fct_sales and fct_webhook_sales) to calculate the average order value. The 'dim_time' table can be used to filter the data for the past 30 days and to group the results by date.",
+        "suggestedApproach": "To approach this query, you can join the sales tables (fct_sales and fct_webhook_sales) with the dim_time table to filter the records for the last 30 days. Then, calculate the average order value by summing the 'amount' for each day and dividing by the count of orders for that day.",
+        "columnMappings": {
+          "inventory": "dim_variant.inventory",
+          "sales": "fct_sales.amount",
+          "revenue": "calculated from amount * unit_price"
+        }
+      },
+      "queryObj": {
+        "query": "SELECT dt.date_id, AVG(s.amount) AS average_order_value\nFROM cortex_3_facts.fct_sales AS s\nJOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id\nWHERE s.hour_id >= NOW() - toIntervalDay(30)\nAND s.order_id IS NOT NULL\nGROUP BY dt.date_id\nORDER BY dt.date_id ASC\nLIMIT 10000",
+        "explanation": "This query calculates the average order value for each date over the past 30 days. It joins the sales data with the date dimension to group the results by date. It ensures that only non-null order IDs are considered, and it orders the results by date in ascending order.",
+        "estimatedRows": 30,
+        "dataPreview": "The output will include date-wise average order values for the last 30 days."
+      },
+      "queryResult": {
+        "success": true,
+        "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-09-103Z.json",
+        "filename": "query_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-09-103Z.json",
+        "dataFile": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-09-103Z.json",
+        "rowCount": 15,
+        "dataSize": 1649,
+        "data": [
+          {
+            "date_id": "2025-06-27",
+            "average_order_value": 2.057815845824411
+          },
+          {
+            "date_id": "2025-06-28",
+            "average_order_value": 2.23728813559322
+          },
+          {
+            "date_id": "2025-06-29",
+            "average_order_value": 1.7962790697674418
+          },
+          {
+            "date_id": "2025-06-30",
+            "average_order_value": 1.8349944629014396
+          },
+          {
+            "date_id": "2025-07-01",
+            "average_order_value": 1.972027972027972
+          },
+          {
+            "date_id": "2025-07-02",
+            "average_order_value": 2.509761388286334
+          },
+          {
+            "date_id": "2025-07-03",
+            "average_order_value": 1.9739130434782608
+          },
+          {
+            "date_id": "2025-07-04",
+            "average_order_value": 1.9431279620853081
+          },
+          {
+            "date_id": "2025-07-05",
+            "average_order_value": 1.8338870431893688
+          },
+          {
+            "date_id": "2025-07-06",
+            "average_order_value": 1.936608557844691
+          },
+          {
+            "date_id": "2025-07-07",
+            "average_order_value": 2.050218340611354
+          },
+          {
+            "date_id": "2025-07-08",
+            "average_order_value": 2.3816964285714284
+          },
+          {
+            "date_id": "2025-07-09",
+            "average_order_value": 2.3658536585365852
+          },
+          {
+            "date_id": "2025-07-10",
+            "average_order_value": 2.110344827586207
+          },
+          {
+            "date_id": "2025-07-11",
+            "average_order_value": 1.864864864864865
+          }
+        ]
+      },
+      "strategy": {
+        "analysisDecision": {
+          "shouldAnalyze": true,
+          "reasoning": "The query involves time-series data with numerical values that can benefit from trend analysis and visualization. Python analysis can provide insights into daily variations in average order value, identify trends, and offer visual representations that are not immediately apparent from raw data."
+        },
+        "insights": {
+          "immediate": [
+            "The average order value fluctuates daily over the 15-day period.",
+            "There are noticeable peaks on certain days, such as July 2nd and July 8th."
+          ],
+          "statistical": [
+            "Calculate the mean, median, and standard deviation of the average order values over the period.",
+            "Identify any significant upward or downward trends in the data."
+          ],
+          "business": [
+            "Understanding daily fluctuations can help in planning promotions or inventory management.",
+            "Identifying peak days can assist in resource allocation and staffing."
+          ]
+        },
+        "pythonScript": {
+          "description": "This script will analyze the average order value over the past 15 days, providing statistical summaries and visualizations to identify trends and patterns.",
+          "code": "# Import necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport os\n\n# Sample data\ndata = [\n {\"date_id\": \"2025-06-27\", \"average_order_value\": 2.057815845824411},\n {\"date_id\": \"2025-06-28\", \"average_order_value\": 2.23728813559322},\n {\"date_id\": \"2025-06-29\", \"average_order_value\": 1.7962790697674418},\n {\"date_id\": \"2025-06-30\", \"average_order_value\": 1.8349944629014396},\n {\"date_id\": \"2025-07-01\", \"average_order_value\": 1.972027972027972},\n {\"date_id\": \"2025-07-02\", \"average_order_value\": 2.509761388286334},\n {\"date_id\": \"2025-07-03\", \"average_order_value\": 1.9739130434782608},\n {\"date_id\": \"2025-07-04\", \"average_order_value\": 1.9431279620853081},\n {\"date_id\": \"2025-07-05\", \"average_order_value\": 1.8338870431893688},\n {\"date_id\": \"2025-07-06\", \"average_order_value\": 1.936608557844691},\n {\"date_id\": \"2025-07-07\", \"average_order_value\": 2.050218340611354},\n {\"date_id\": \"2025-07-08\", \"average_order_value\": 2.3816964285714284},\n {\"date_id\": \"2025-07-09\", \"average_order_value\": 2.3658536585365852},\n {\"date_id\": \"2025-07-10\", \"average_order_value\": 2.110344827586207},\n {\"date_id\": \"2025-07-11\", \"average_order_value\": 1.864864864864865}\n]\n\n# Convert data to DataFrame\ndf = pd.DataFrame(data)\n\n# Convert date_id to datetime\ndf['date_id'] = pd.to_datetime(df['date_id'])\n\n# Calculate statistical metrics\nmean_value = df['average_order_value'].mean()\nmedian_value = df['average_order_value'].median()\nstd_dev = df['average_order_value'].std()\n\n# Print statistical metrics\nprint(f\"Mean Average Order Value: {mean_value}\")\nprint(f\"Median Average Order Value: {median_value}\")\nprint(f\"Standard Deviation: {std_dev}\")\n\n# Plot the data\nplt.figure(figsize=(10, 6))\nplt.plot(df['date_id'], df['average_order_value'], marker='o', linestyle='-')\nplt.title('Average Order Value Over Time')\nplt.xlabel('Date')\nplt.ylabel('Average Order Value')\nplt.grid(True)\n\n# Save the plot\noutput_dir = '.' # Change this to your desired output directory\nplot_filename = os.path.join(output_dir, 'average_order_value_trend.png')\nplt.savefig(plot_filename)\nplt.show()",
+          "outputFiles": [
+            "average_order_value_trend.png"
+          ],
+          "skipAnalysis": false,
+          "missingDependencies": []
+        },
+        "recommendations": [
+          "Monitor daily average order values to identify any unusual spikes or drops.",
+          "Investigate the causes of peak days to replicate successful strategies.",
+          "Consider implementing dynamic pricing or promotions based on observed trends."
+        ],
+        "followUpQuestions": [
+          "Are there any external factors that could have influenced the average order value on peak days?",
+          "How does the average order value compare to previous months or years?",
+          "What are the customer demographics or behaviors on days with higher average order values?"
+        ]
+      },
+      "analysisResult": {
+        "success": false,
+        "output": "",
+        "error": null,
+        "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-18-639Z.py",
+        "outputDir": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-18-639Z",
+        "outputFiles": [
+          {
+            "filename": "average_order_value_trend.png",
+            "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612197529_y1ehuwtda_2025-07-27T10-30-18-639Z/average_order_value_trend.png",
+            "size": 45190,
+            "type": ".png"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "dataProcessed": "15 rows (2KB)",
+      "query": "SELECT dt.date_id, AVG(s.amount) AS average_order_value\nFROM cortex_3_facts.fct_sales AS s\nJOIN cortex_2_dimensions.dim_time AS dt ON s.hour_id = dt.hour_id\nWHERE s.hour_id >= NOW() - toIntervalDay(30)\nAND s.order_id IS NOT NULL\nGROUP BY dt.date_id\nORDER BY dt.date_id ASC\nLIMIT 10000",
+      "insights": {
+        "immediate": [
+          "The average order value fluctuates daily over the 15-day period.",
+          "There are noticeable peaks on certain days, such as July 2nd and July 8th."
+        ],
+        "statistical": [
+          "Calculate the mean, median, and standard deviation of the average order values over the period.",
+          "Identify any significant upward or downward trends in the data."
+        ],
+        "business": [
+          "Understanding daily fluctuations can help in planning promotions or inventory management.",
+          "Identifying peak days can assist in resource allocation and staffing."
+        ]
+      },
+      "recommendations": [
+        "Monitor daily average order values to identify any unusual spikes or drops.",
+        "Investigate the causes of peak days to replicate successful strategies.",
+        "Consider implementing dynamic pricing or promotions based on observed trends."
+      ],
+      "followUpQuestions": [
+        "Are there any external factors that could have influenced the average order value on peak days?",
+        "How does the average order value compare to previous months or years?",
+        "What are the customer demographics or behaviors on days with higher average order values?"
+      ]
+    }
+  },
+  "stats": {
+    "queriesExecuted": 2,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 1,
+    "errors": 1,
+    "startTime": "2025-07-27T10:29:57.530Z",
+    "endTime": "2025-07-27T10:31:18.727Z",
+    "durationMs": 81197,
+    "durationSeconds": 81
+  }
+}
+[2025-07-27T10:31:18.733Z] SYSTEM: Console output saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/logs/console_cli_1753612197529_y1ehuwtda.log

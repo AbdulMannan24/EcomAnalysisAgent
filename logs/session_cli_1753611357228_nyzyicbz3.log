@@ -1,0 +1,536 @@
+[2025-07-27T10:15:57.231Z] SESSION_START: User Query: "AOV: 120"
+[2025-07-27T10:15:57.231Z] SESSION_START: User Query: "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example : {"
+[2025-07-27T10:15:57.231Z] SESSION_START: User Query: "Week: 1"
+[2025-07-27T10:15:57.230Z] SESSION_START: User Query: "Month: June"
+[2025-07-27T10:15:57.237Z] SYSTEM: Session ID: cli_1753611357228_nyzyicbz3
+[2025-07-27T10:15:57.237Z] SYSTEM: Session ID: cli_1753611357227_n8vj9vo53
+[2025-07-27T10:15:57.240Z] SYSTEM: Session ID: cli_1753611357227_2d1qd5jav
+[2025-07-27T10:15:57.245Z] SYSTEM: Session ID: cli_1753611357227_j504h5sxk
+[2025-07-27T10:15:57.246Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T10:15:57.246Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T10:15:57.246Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T10:15:57.246Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T10:15:57.246Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:15:57.246Z] CONSOLE_LOG:    Query: "Week: 1"
+[2025-07-27T10:15:57.256Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:15:57.256Z] CONSOLE_LOG:    Query: "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example : {"
+[2025-07-27T10:15:57.257Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:15:57.257Z] CONSOLE_LOG:    Query: "AOV: 120"
+[2025-07-27T10:15:57.258Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:15:57.258Z] CONSOLE_LOG:    Query: "Month: June"
+[2025-07-27T10:16:01.453Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 1902,
+  "responseLength": 800,
+  "tokens": null,
+  "callNumber": 1
+}
+[2025-07-27T10:16:01.455Z] CONSOLE_LOG:    ✓ Validation result: Invalid
+[2025-07-27T10:16:01.455Z] CONSOLE_LOG: [31m❌ Query processing failed[0m
+[2025-07-27T10:16:01.455Z] CONSOLE_LOG: [31mError: The user query 'Week: 1' does not specify any relevant columns or tables that can be directly linked to a week or time period. There is no indication of a time dimension in the provided schema that would allow for filtering or aggregating data by week.[0m
+[2025-07-27T10:16:01.741Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 1906,
+  "responseLength": 791,
+  "tokens": null,
+  "callNumber": 2
+}
+[2025-07-27T10:16:01.742Z] CONSOLE_LOG:    ✓ Validation result: Invalid
+[2025-07-27T10:16:01.742Z] CONSOLE_LOG: [31m❌ Query processing failed[0m
+[2025-07-27T10:16:01.742Z] CONSOLE_LOG: [31mError: The user query 'Month: June' does not specify any relevant columns or tables that contain date or time information. The schema does not provide a direct way to filter or query data based on a specific month without a date column.[0m
+[2025-07-27T10:16:02.560Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 1903,
+  "responseLength": 905,
+  "tokens": null,
+  "callNumber": 3
+}
+[2025-07-27T10:16:02.561Z] CONSOLE_LOG:    ✓ Validation result: Invalid
+[2025-07-27T10:16:02.561Z] CONSOLE_LOG: [31m❌ Query processing failed[0m
+[2025-07-27T10:16:02.561Z] CONSOLE_LOG: [31mError: The user query 'AOV: 120' is ambiguous and does not specify what AOV (Average Order Value) refers to in terms of data. Additionally, there are no direct columns or calculations provided in the schema that would allow for a straightforward calculation of AOV without further context or data relationships.[0m
+[2025-07-27T10:16:03.417Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 2003,
+  "responseLength": 998,
+  "tokens": null,
+  "callNumber": 4
+}
+[2025-07-27T10:16:03.418Z] CONSOLE_LOG:    ✓ Validation result: Valid
+[2025-07-27T10:16:03.418Z] CONSOLE_LOG:    📊 Required tables: cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_time
+[2025-07-27T10:16:03.418Z] CONSOLE_LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T10:16:03.418Z] CONSOLE_LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    Columns (12):
+[2025-07-27T10:16:03.418Z] CONSOLE_LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - session_id (String)
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - attribution_id (Nullable(String))
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - order_id (String)
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:16:03.419Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "session_id",
+      "type": "String"
+    },
+    {
+      "name": "attribution_id",
+      "type": "Nullable(String)"
+    },
+    {
+      "name": "order_id",
+      "type": "String"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    Columns (10):
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:16:03.419Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - order_id (Int64)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:16:03.420Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_webhook_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_webhook_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "order_id",
+      "type": "Int64"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG: 
+📋 Table: cortex_2_dimensions.dim_time
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    Columns (11):
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - date_id (Date)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - day_of_week (UInt8)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - day_of_month (UInt8)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - week_of_year (UInt8)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - day_name (String)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - month (UInt8)
+[2025-07-27T10:16:03.421Z] CONSOLE_LOG:    - quarter (UInt8)
+[2025-07-27T10:16:03.421Z] CONSOLE_LOG:    - year (UInt16)
+[2025-07-27T10:16:03.420Z] CONSOLE_LOG:    - month_name (String)
+[2025-07-27T10:16:03.421Z] CONSOLE_LOG:    - is_weekend (UInt8)
+[2025-07-27T10:16:03.421Z] SCHEMA_DEBUG: Table cortex_2_dimensions.dim_time columns
+Data: {
+  "tableName": "cortex_2_dimensions.dim_time",
+  "columns": [
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "date_id",
+      "type": "Date"
+    },
+    {
+      "name": "day_of_week",
+      "type": "UInt8"
+    },
+    {
+      "name": "day_name",
+      "type": "String"
+    },
+    {
+      "name": "day_of_month",
+      "type": "UInt8"
+    },
+    {
+      "name": "week_of_year",
+      "type": "UInt8"
+    },
+    {
+      "name": "month",
+      "type": "UInt8"
+    },
+    {
+      "name": "month_name",
+      "type": "String"
+    },
+    {
+      "name": "quarter",
+      "type": "UInt8"
+    },
+    {
+      "name": "year",
+      "type": "UInt16"
+    },
+    {
+      "name": "is_weekend",
+      "type": "UInt8"
+    }
+  ]
+}
+[2025-07-27T10:16:03.421Z] CONSOLE_LOG: 
+
+[2025-07-27T10:16:08.391Z] CONSOLE_LOG:    🔧 Generated SQL: SELECT toStartOfWeek(hour_id) AS week_start, AVG(total_cost) AS average_order_value FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND total_cost IS NOT NULL GROUP BY week_start ORDER BY week_start LIMIT 10000
+[2025-07-27T10:16:08.391Z] CONSOLE_LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T10:16:08.392Z] CONSOLE_LOG: Pre-validation issues found: 0
+[2025-07-27T10:16:08.392Z] CONSOLE_LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales"
+]
+[2025-07-27T10:16:08.392Z] CONSOLE_LOG: 🔍 Executing query: SELECT toStartOfWeek(hour_id) AS week_start, AVG(total_cost) AS average_order_value FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND total_cost IS NOT NULL GROUP BY week_start ORDER BY week_start LIMIT 10000
+[2025-07-27T10:16:08.391Z] CONSOLE_LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T10:16:08.882Z] DATABASE_QUERY: Query SUCCESS
+Data: {
+  "query": "SELECT toStartOfWeek(hour_id) AS week_start, AVG(total_cost) AS average_order_value FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND total_cost IS NOT NULL GROUP BY week_start ORDER BY week_start LIMIT 10000",
+  "success": true,
+  "rowCount": 19,
+  "error": null,
+  "queryNumber": 1
+}
+[2025-07-27T10:16:08.885Z] CONSOLE_LOG: 💾 Saved query result: query_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-08-883Z.json (19 rows, 2KB)
+[2025-07-27T10:16:08.885Z] CONSOLE_LOG:    📊 Query returned: 19 rows
+[2025-07-27T10:16:08.885Z] CONSOLE_LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T10:16:08.886Z] CONSOLE_LOG: 📊 Using representative sample: 19 rows from 19 total
+[2025-07-27T10:16:08.886Z] CONSOLE_LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T10:16:08.885Z] CONSOLE_LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-08-883Z.json
+[2025-07-27T10:16:21.407Z] CONSOLE_LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T10-16-21-404Z.json
+[2025-07-27T10:16:21.407Z] MODEL_CALL: Called gpt-4o
+Data: {
+  "model": "gpt-4o",
+  "promptLength": 4668,
+  "responseLength": 4606,
+  "tokens": null,
+  "callNumber": 5
+}
+[2025-07-27T10:16:21.491Z] CONSOLE_LOG: ✅ Generated Python script passed validation
+[2025-07-27T10:16:21.491Z] CONSOLE_LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T10:16:21.519Z] CONSOLE_LOG: 🐍 Executing Python analysis script...
+[2025-07-27T10:16:21.519Z] CONSOLE_LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-21-491Z.py
+[2025-07-27T10:16:21.519Z] CONSOLE_LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-21-491Z
+[2025-07-27T10:16:21.519Z] CONSOLE_LOG: 📝 Starting Python script execution...
+[2025-07-27T10:17:11.731Z] CONSOLE_LOG: 🐍 Python: Loaded 19 rows with columns: ['week_start', 'average_order_value']
+[2025-07-27T10:17:11.734Z] CONSOLE_LOG: 🐍 Python: Analysis completed successfully!
+[2025-07-27T10:17:11.880Z] CONSOLE_LOG: Python script exited with code 0
+[2025-07-27T10:17:11.881Z] PYTHON_SCRIPT: Python execution SUCCESS
+Data: {
+  "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-21-491Z.py",
+  "success": true,
+  "output": "Loaded 19 rows with columns: ['week_start', 'average_order_value']\nAnalysis completed successfully!\n",
+  "error": ""
+}
+[2025-07-27T10:17:11.884Z] CONSOLE_LOG: 📊 Step 6: Compiling final response...
+[2025-07-27T10:17:11.885Z] SESSION_END: Session completed successfully
+Data: {
+  "success": true,
+  "finalData": {
+    "success": true,
+    "workflow": {
+      "step": 1,
+      "userQuery": "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example : {",
+      "sessionId": "cli_1753611357227_n8vj9vo53",
+      "timestamp": "2025-07-27T10:15:57.246Z",
+      "validation": {
+        "isValid": true,
+        "requiredTables": [
+          "cortex_3_facts.fct_sales",
+          "cortex_3_facts.fct_webhook_sales",
+          "cortex_2_dimensions.dim_time"
+        ],
+        "reason": "The query can be answered using the sales data from fct_sales and fct_webhook_sales to calculate the average order value. The amount and unit_price columns in these tables provide the necessary data to compute the average order value. The dim_time table can be used to filter and analyze the data on a weekly basis for the past 6 months.",
+        "suggestedApproach": "To calculate the average order value for the past 6 months on a weekly basis, you can aggregate the sales data from fct_sales and fct_webhook_sales by week, summing the amounts and dividing by the count of orders. Use the dim_time table to filter the data for the last 6 months and group by week.",
+        "columnMappings": {
+          "inventory": "dim_variant.inventory",
+          "sales": "fct_sales.amount",
+          "revenue": "calculated from amount * unit_price"
+        }
+      },
+      "queryObj": {
+        "query": "SELECT toStartOfWeek(hour_id) AS week_start, AVG(total_cost) AS average_order_value FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND total_cost IS NOT NULL GROUP BY week_start ORDER BY week_start LIMIT 10000",
+        "explanation": "This query calculates the average order value for the past 6 months, analyzing it on a weekly basis. It selects the start of each week and the average total cost of orders, filtering out any records where total_cost is NULL. The results are grouped by week and ordered chronologically.",
+        "estimatedRows": "The estimated number of rows returned will depend on the data distribution, but it will be limited to a maximum of 10000 rows.",
+        "dataPreview": "The expected output will include two columns: 'week_start' (the start date of each week) and 'average_order_value' (the average total cost of orders for that week)."
+      },
+      "queryResult": {
+        "success": true,
+        "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-08-883Z.json",
+        "filename": "query_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-08-883Z.json",
+        "dataFile": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-08-883Z.json",
+        "rowCount": 19,
+        "dataSize": 1926,
+        "data": [
+          {
+            "week_start": "2025-01-26",
+            "average_order_value": 6.368589710107088
+          },
+          {
+            "week_start": "2025-02-02",
+            "average_order_value": 5.708743589743539
+          },
+          {
+            "week_start": "2025-02-09",
+            "average_order_value": 6.498183292781907
+          },
+          {
+            "week_start": "2025-02-16",
+            "average_order_value": 6.565512916980262
+          },
+          {
+            "week_start": "2025-02-23",
+            "average_order_value": 6.027572372920025
+          },
+          {
+            "week_start": "2025-03-02",
+            "average_order_value": 7.023419782870975
+          },
+          {
+            "week_start": "2025-03-09",
+            "average_order_value": 6.254530851606345
+          },
+          {
+            "week_start": "2025-03-16",
+            "average_order_value": 6.269585935692915
+          },
+          {
+            "week_start": "2025-03-23",
+            "average_order_value": 10.909535714285795
+          },
+          {
+            "week_start": "2025-03-30",
+            "average_order_value": 35.39057447485733
+          },
+          {
+            "week_start": "2025-04-06",
+            "average_order_value": 16.636348232544684
+          },
+          {
+            "week_start": "2025-04-13",
+            "average_order_value": 51.48321186535234
+          },
+          {
+            "week_start": "2025-04-20",
+            "average_order_value": 23.596281074578844
+          },
+          {
+            "week_start": "2025-04-27",
+            "average_order_value": 28.783506940178302
+          },
+          {
+            "week_start": "2025-05-04",
+            "average_order_value": 16.138281917418336
+          },
+          {
+            "week_start": "2025-06-15",
+            "average_order_value": 7.656871794871746
+          },
+          {
+            "week_start": "2025-06-22",
+            "average_order_value": 6.6678686087990755
+          },
+          {
+            "week_start": "2025-06-29",
+            "average_order_value": 6.184937100433069
+          },
+          {
+            "week_start": "2025-07-06",
+            "average_order_value": 7.0792935239697234
+          }
+        ]
+      },
+      "strategy": {
+        "analysisDecision": {
+          "shouldAnalyze": true,
+          "reasoning": "The data contains meaningful numerical values (average order value) over a time series (weekly basis). Analyzing this data can reveal trends, patterns, and potential anomalies in order values over the past 6 months, which can provide valuable insights for business decision-making."
+        },
+        "insights": {
+          "immediate": [
+            "There is a noticeable spike in average order value starting from the week of 2025-03-23, peaking at 2025-04-13.",
+            "The average order value shows significant fluctuations, indicating potential changes in customer behavior or pricing strategies."
+          ],
+          "statistical": [
+            "The mean average order value over the period is approximately 14.5.",
+            "There is a high variance in the average order values, suggesting inconsistent order sizes or pricing."
+          ],
+          "business": [
+            "The spike in average order value could indicate a successful marketing campaign or a change in product offerings.",
+            "The fluctuations in order value suggest a need to investigate the underlying causes, such as changes in customer preferences or external market factors."
+          ]
+        },
+        "pythonScript": {
+          "description": "This script will analyze the average order value on a weekly basis over the past 6 months, identify trends, and visualize the data to highlight significant changes and patterns.",
+          "code": "# Import necessary libraries\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport os\n\n# Sample data\ndata = [\n {\"week_start\": \"2025-01-26\", \"average_order_value\": 6.368589710107088},\n {\"week_start\": \"2025-02-02\", \"average_order_value\": 5.708743589743539},\n {\"week_start\": \"2025-02-09\", \"average_order_value\": 6.498183292781907},\n {\"week_start\": \"2025-02-16\", \"average_order_value\": 6.565512916980262},\n {\"week_start\": \"2025-02-23\", \"average_order_value\": 6.027572372920025},\n {\"week_start\": \"2025-03-02\", \"average_order_value\": 7.023419782870975},\n {\"week_start\": \"2025-03-09\", \"average_order_value\": 6.254530851606345},\n {\"week_start\": \"2025-03-16\", \"average_order_value\": 6.269585935692915},\n {\"week_start\": \"2025-03-23\", \"average_order_value\": 10.909535714285795},\n {\"week_start\": \"2025-03-30\", \"average_order_value\": 35.39057447485733},\n {\"week_start\": \"2025-04-06\", \"average_order_value\": 16.636348232544684},\n {\"week_start\": \"2025-04-13\", \"average_order_value\": 51.48321186535234},\n {\"week_start\": \"2025-04-20\", \"average_order_value\": 23.596281074578844},\n {\"week_start\": \"2025-04-27\", \"average_order_value\": 28.783506940178302},\n {\"week_start\": \"2025-05-04\", \"average_order_value\": 16.138281917418336},\n {\"week_start\": \"2025-06-15\", \"average_order_value\": 7.656871794871746},\n {\"week_start\": \"2025-06-22\", \"average_order_value\": 6.6678686087990755},\n {\"week_start\": \"2025-06-29\", \"average_order_value\": 6.184937100433069},\n {\"week_start\": \"2025-07-06\", \"average_order_value\": 7.0792935239697234}\n]\n\n# Create DataFrame\ndf = pd.DataFrame(data)\n\n# Convert week_start to datetime\ndf['week_start'] = pd.to_datetime(df['week_start'])\n\n# Set week_start as index\ndf.set_index('week_start', inplace=True)\n\n# Plot average order value over time\nplt.figure(figsize=(12, 6))\nplt.plot(df.index, df['average_order_value'], marker='o', linestyle='-')\nplt.title('Average Order Value Over Time')\nplt.xlabel('Week Start')\nplt.ylabel('Average Order Value')\nplt.grid(True)\nplt.xticks(rotation=45)\n\n# Save plot\noutput_dir = '.' # Change this to your desired output directory\nplt.savefig(os.path.join(output_dir, 'average_order_value_trend.png'))\nplt.show()\n",
+          "outputFiles": [
+            "average_order_value_trend.png"
+          ],
+          "skipAnalysis": false,
+          "missingDependencies": []
+        },
+        "recommendations": [
+          "Investigate the cause of the spike in average order value during March and April 2025 to replicate successful strategies.",
+          "Consider stabilizing pricing or order strategies to reduce fluctuations in average order value.",
+          "Analyze customer feedback or market conditions during the period of high variance to understand external influences."
+        ],
+        "followUpQuestions": [
+          "What specific events or promotions occurred during the spike in average order value?",
+          "Are there any external market factors that could have influenced the order values during this period?",
+          "How do these trends compare to the same period in previous years?"
+        ]
+      },
+      "analysisResult": {
+        "success": true,
+        "output": "Loaded 19 rows with columns: ['week_start', 'average_order_value']\nAnalysis completed successfully!\n",
+        "error": null,
+        "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-21-491Z.py",
+        "outputDir": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-21-491Z",
+        "outputFiles": [
+          {
+            "filename": "average_order_value_trend.png",
+            "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-21-491Z/average_order_value_trend.png",
+            "size": 39173,
+            "type": ".png"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "dataProcessed": "19 rows (2KB)",
+      "query": "SELECT toStartOfWeek(hour_id) AS week_start, AVG(total_cost) AS average_order_value FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND total_cost IS NOT NULL GROUP BY week_start ORDER BY week_start LIMIT 10000",
+      "insights": {
+        "immediate": [
+          "There is a noticeable spike in average order value starting from the week of 2025-03-23, peaking at 2025-04-13.",
+          "The average order value shows significant fluctuations, indicating potential changes in customer behavior or pricing strategies."
+        ],
+        "statistical": [
+          "The mean average order value over the period is approximately 14.5.",
+          "There is a high variance in the average order values, suggesting inconsistent order sizes or pricing."
+        ],
+        "business": [
+          "The spike in average order value could indicate a successful marketing campaign or a change in product offerings.",
+          "The fluctuations in order value suggest a need to investigate the underlying causes, such as changes in customer preferences or external market factors."
+        ]
+      },
+      "recommendations": [
+        "Investigate the cause of the spike in average order value during March and April 2025 to replicate successful strategies.",
+        "Consider stabilizing pricing or order strategies to reduce fluctuations in average order value.",
+        "Analyze customer feedback or market conditions during the period of high variance to understand external influences."
+      ],
+      "followUpQuestions": [
+        "What specific events or promotions occurred during the spike in average order value?",
+        "Are there any external market factors that could have influenced the order values during this period?",
+        "How do these trends compare to the same period in previous years?"
+      ],
+      "analysisOutput": "Loaded 19 rows with columns: ['week_start', 'average_order_value']\nAnalysis completed successfully!\n",
+      "generatedFiles": [
+        {
+          "filename": "average_order_value_trend.png",
+          "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611357227_n8vj9vo53_2025-07-27T10-16-21-491Z/average_order_value_trend.png",
+          "size": 39173,
+          "type": ".png"
+        }
+      ]
+    }
+  },
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 5,
+    "modelCallsByType": {
+      "gpt-4o-mini": 4,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T10:15:57.231Z",
+    "endTime": "2025-07-27T10:17:11.885Z",
+    "durationMs": 74654,
+    "durationSeconds": 75
+  }
+}
+[2025-07-27T10:17:11.898Z] SYSTEM: Console output saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/logs/console_cli_1753611357228_nyzyicbz3.log

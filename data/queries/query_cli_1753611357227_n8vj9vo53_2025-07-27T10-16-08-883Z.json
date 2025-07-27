@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-07-27T10-16-08-883Z",
+  "userQuery": "This query calculates the average order value for the past 6 months, analyzing it on a weekly basis. It selects the start of each week and the average total cost of orders, filtering out any records where total_cost is NULL. The results are grouped by week and ordered chronologically.",
+  "sqlQuery": "SELECT toStartOfWeek(hour_id) AS week_start, AVG(total_cost) AS average_order_value FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND total_cost IS NOT NULL GROUP BY week_start ORDER BY week_start LIMIT 10000",
+  "rowCount": 19,
+  "dataSize": 1300,
+  "data": [
+    {
+      "week_start": "2025-01-26",
+      "average_order_value": 6.368589710107088
+    },
+    {
+      "week_start": "2025-02-02",
+      "average_order_value": 5.708743589743539
+    },
+    {
+      "week_start": "2025-02-09",
+      "average_order_value": 6.498183292781907
+    },
+    {
+      "week_start": "2025-02-16",
+      "average_order_value": 6.565512916980262
+    },
+    {
+      "week_start": "2025-02-23",
+      "average_order_value": 6.027572372920025
+    },
+    {
+      "week_start": "2025-03-02",
+      "average_order_value": 7.023419782870975
+    },
+    {
+      "week_start": "2025-03-09",
+      "average_order_value": 6.254530851606345
+    },
+    {
+      "week_start": "2025-03-16",
+      "average_order_value": 6.269585935692915
+    },
+    {
+      "week_start": "2025-03-23",
+      "average_order_value": 10.909535714285795
+    },
+    {
+      "week_start": "2025-03-30",
+      "average_order_value": 35.39057447485733
+    },
+    {
+      "week_start": "2025-04-06",
+      "average_order_value": 16.636348232544684
+    },
+    {
+      "week_start": "2025-04-13",
+      "average_order_value": 51.48321186535234
+    },
+    {
+      "week_start": "2025-04-20",
+      "average_order_value": 23.596281074578844
+    },
+    {
+      "week_start": "2025-04-27",
+      "average_order_value": 28.783506940178302
+    },
+    {
+      "week_start": "2025-05-04",
+      "average_order_value": 16.138281917418336
+    },
+    {
+      "week_start": "2025-06-15",
+      "average_order_value": 7.656871794871746
+    },
+    {
+      "week_start": "2025-06-22",
+      "average_order_value": 6.6678686087990755
+    },
+    {
+      "week_start": "2025-06-29",
+      "average_order_value": 6.184937100433069
+    },
+    {
+      "week_start": "2025-07-06",
+      "average_order_value": 7.0792935239697234
+    }
+  ]
+}

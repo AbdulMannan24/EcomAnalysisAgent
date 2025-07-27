@@ -1,0 +1,31 @@
+{
+  "sessionId": "cli_1753612197529_y1ehuwtda",
+  "userQuery": "can you give me the Average Order value for the past 30 days, you need to give me the date wise data for this",
+  "success": true,
+  "stats": {
+    "queriesExecuted": 2,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 1,
+    "errors": 1,
+    "startTime": "2025-07-27T10:29:57.530Z",
+    "endTime": "2025-07-27T10:31:18.727Z",
+    "durationMs": 81197,
+    "durationSeconds": 81
+  },
+  "summary": {
+    "totalQueries": 2,
+    "totalModelCalls": 2,
+    "modelBreakdown": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "totalRetries": 1,
+    "totalErrors": 1,
+    "duration": "81s",
+    "errorRate": "50.00%"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "sessionId": "cli_1753608977925_819g5q6l2",
+  "userQuery": "Show me my top 10 best-selling products by revenue for the last 3 months and enrich the products for as much as possible with all the available data in the database",
+  "success": true,
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 3,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 2
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T09:36:17.925Z",
+    "endTime": "2025-07-27T09:37:09.530Z",
+    "durationMs": 51605,
+    "durationSeconds": 52
+  },
+  "summary": {
+    "totalQueries": 1,
+    "totalModelCalls": 3,
+    "modelBreakdown": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 2
+    },
+    "totalRetries": 0,
+    "totalErrors": 0,
+    "duration": "52s",
+    "errorRate": "0.00%"
+  }
+}

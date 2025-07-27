@@ -1,0 +1,129 @@
+{
+  "timestamp": "2025-07-27T10-21-39-469Z",
+  "userQuery": "This query calculates the Average Order Value (AoV) for the past 6 months, grouped by week and month. It filters out any records where the amount is NULL and orders the results by month and week.",
+  "sqlQuery": " SELECT toUInt16(toStartOfWeek(hour_id)) AS week_start, toUInt8(month(hour_id)) AS month, AVG(amount) AS AoV FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL GROUP BY week_start, month ORDER BY month, week_start LIMIT 10000 ",
+  "rowCount": 24,
+  "dataSize": 1338,
+  "data": [
+    {
+      "week_start": 20114,
+      "month": 1,
+      "AoV": 2.0528332877087325
+    },
+    {
+      "week_start": 20114,
+      "month": 2,
+      "AoV": 3.1363636363636362
+    },
+    {
+      "week_start": 20121,
+      "month": 2,
+      "AoV": 1.9166666666666667
+    },
+    {
+      "week_start": 20128,
+      "month": 2,
+      "AoV": 2.200932684509327
+    },
+    {
+      "week_start": 20135,
+      "month": 2,
+      "AoV": 2.073238023576624
+    },
+    {
+      "week_start": 20142,
+      "month": 2,
+      "AoV": 2.2352652259332024
+    },
+    {
+      "week_start": 20142,
+      "month": 3,
+      "AoV": 2.5936507936507938
+    },
+    {
+      "week_start": 20149,
+      "month": 3,
+      "AoV": 2.3724366706875752
+    },
+    {
+      "week_start": 20156,
+      "month": 3,
+      "AoV": 1.8691993880673126
+    },
+    {
+      "week_start": 20163,
+      "month": 3,
+      "AoV": 1.9243580846634283
+    },
+    {
+      "week_start": 20170,
+      "month": 3,
+      "AoV": 1.8450892857142858
+    },
+    {
+      "week_start": 20177,
+      "month": 3,
+      "AoV": 1.7094890510948906
+    },
+    {
+      "week_start": 20177,
+      "month": 4,
+      "AoV": 1.6585778781038374
+    },
+    {
+      "week_start": 20184,
+      "month": 4,
+      "AoV": 1.9924043236926672
+    },
+    {
+      "week_start": 20191,
+      "month": 4,
+      "AoV": 1.4769470058882346
+    },
+    {
+      "week_start": 20198,
+      "month": 4,
+      "AoV": 1.818765036086608
+    },
+    {
+      "week_start": 20205,
+      "month": 4,
+      "AoV": 1.5437665782493368
+    },
+    {
+      "week_start": 20205,
+      "month": 5,
+      "AoV": 1.930298719772404
+    },
+    {
+      "week_start": 20212,
+      "month": 5,
+      "AoV": 1.8661604176554343
+    },
+    {
+      "week_start": 20254,
+      "month": 6,
+      "AoV": 2.201709401709402
+    },
+    {
+      "week_start": 20261,
+      "month": 6,
+      "AoV": 2.006242568370987
+    },
+    {
+      "week_start": 20268,
+      "month": 6,
+      "AoV": 1.813953488372093
+    },
+    {
+      "week_start": 20268,
+      "month": 7,
+      "AoV": 2.0233368164402648
+    },
+    {
+      "week_start": 20275,
+      "month": 7,
+      "AoV": 2.1396131202691335
+    }
+  ]
+}

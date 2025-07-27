@@ -1,0 +1,133 @@
+[2025-07-27T10:21:16.191Z] LOG: [1m[36m
+🚀 E-commerce Analytics Agent CLI
+[0m
+[2025-07-27T10:21:16.191Z] LOG: [34m🔍 [INIT] Starting analytics agent initialization...[0m
+[2025-07-27T10:21:16.191Z] LOG: 🚀 Initializing Analytics Agent...
+[2025-07-27T10:21:18.098Z] LOG: 📊 Fetching database schemas...
+[2025-07-27T10:21:18.098Z] LOG: 📋 Processing 2 database(s): cortex_2_dimensions, cortex_3_facts
+[2025-07-27T10:21:18.098Z] LOG: 🔍 Processing database: cortex_2_dimensions
+[2025-07-27T10:21:18.572Z] LOG: 📋 Found 6 tables in cortex_2_dimensions
+[2025-07-27T10:21:18.730Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_attribution (11 columns)
+[2025-07-27T10:21:18.892Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_product (11 columns)
+[2025-07-27T10:21:19.054Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_session (9 columns)
+[2025-07-27T10:21:19.211Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_time (11 columns)
+[2025-07-27T10:21:19.370Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_user (8 columns)
+[2025-07-27T10:21:19.526Z] LOG: ✓ Cached schema for: cortex_2_dimensions.dim_variant (11 columns)
+[2025-07-27T10:21:19.526Z] LOG: 🔍 Processing database: cortex_3_facts
+[2025-07-27T10:21:19.682Z] LOG: 📋 Found 3 tables in cortex_3_facts
+[2025-07-27T10:21:19.839Z] LOG: ✓ Cached schema for: cortex_3_facts.fct_page_views (6 columns)
+[2025-07-27T10:21:19.998Z] LOG: ✓ Cached schema for: cortex_3_facts.fct_sales (12 columns)
+[2025-07-27T10:21:20.164Z] LOG: ✓ Cached schema for: cortex_3_facts.fct_webhook_sales (10 columns)
+[2025-07-27T10:21:20.164Z] LOG: 📚 Cached 9 table schemas
+[2025-07-27T10:21:20.164Z] LOG: ✅ Analytics Agent initialized successfully
+[2025-07-27T10:21:20.164Z] LOG: [32m✅ Analytics agent initialized successfully[0m
+[2025-07-27T10:21:20.164Z] LOG: [36mℹ️  Cached 9 table schemas from databases[0m
+[2025-07-27T10:21:20.164Z] LOG: [2m
+📋 Available Tables:[0m
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_2_dimensions.dim_attribution[0m (11 columns)
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_2_dimensions.dim_product[0m (11 columns)
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_2_dimensions.dim_session[0m (9 columns)
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_2_dimensions.dim_time[0m (11 columns)
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_2_dimensions.dim_user[0m (8 columns)
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_2_dimensions.dim_variant[0m (11 columns)
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_3_facts.fct_page_views[0m (6 columns)
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_3_facts.fct_sales[0m (12 columns)
+[2025-07-27T10:21:20.164Z] LOG:    [36mcortex_3_facts.fct_webhook_sales[0m (10 columns)
+[2025-07-27T10:21:20.164Z] LOG: [33m
+💡 Type your analytics query, or use these commands:[0m
+[2025-07-27T10:21:20.164Z] LOG:    • help    - Show available commands
+[2025-07-27T10:21:20.164Z] LOG:    • tables  - List all available tables
+[2025-07-27T10:21:20.165Z] LOG:    • schema <table> - Show table schema
+[2025-07-27T10:21:20.165Z] LOG:    • exit    - Exit the CLI
+
+[2025-07-27T10:21:28.112Z] LOG: [33m
+🔍 Processing query: "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example:month: june, week : 1, AoV: 120"
+[0m
+[2025-07-27T10:21:28.112Z] LOG: [34m🔍 [VALIDATION] Validating query against database schemas...[0m
+[2025-07-27T10:21:28.112Z] LOG: [34m🔍 [PROCESSING] Starting analysis with session ID: cli_1753611688112_zybd3idd4[0m
+[2025-07-27T10:21:28.115Z] LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:21:28.115Z] LOG:    Query: "can you give me the Average Order value for the past 6 months, analyse it on a weekly basis, for example:month: june, week : 1, AoV: 120"
+[2025-07-27T10:21:34.657Z] LOG:    ✓ Validation result: Valid
+[2025-07-27T10:21:34.657Z] LOG:    📊 Required tables: cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_time
+[2025-07-27T10:21:34.657Z] LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T10:21:34.657Z] LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T10:21:34.657Z] LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T10:21:34.657Z] LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T10:21:34.658Z] LOG:    Columns (12):
+[2025-07-27T10:21:34.658Z] LOG:    - shop (String)
+[2025-07-27T10:21:34.658Z] LOG:    - hour_id (DateTime)
+[2025-07-27T10:21:34.658Z] LOG:    - customer_id (Int64)
+[2025-07-27T10:21:34.658Z] LOG:    - session_id (String)
+[2025-07-27T10:21:34.658Z] LOG:    - attribution_id (Nullable(String))
+[2025-07-27T10:21:34.658Z] LOG:    - order_id (String)
+[2025-07-27T10:21:34.658Z] LOG:    - product_id (Int64)
+[2025-07-27T10:21:34.658Z] LOG:    - variant_id (Int64)
+[2025-07-27T10:21:34.658Z] LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:21:34.658Z] LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:21:34.658Z] LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:21:34.658Z] LOG:    - currency_code (String)
+[2025-07-27T10:21:34.658Z] LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T10:21:34.658Z] LOG:    Columns (10):
+[2025-07-27T10:21:34.658Z] LOG:    - shop (String)
+[2025-07-27T10:21:34.658Z] LOG:    - hour_id (DateTime)
+[2025-07-27T10:21:34.658Z] LOG:    - customer_id (Int64)
+[2025-07-27T10:21:34.658Z] LOG:    - order_id (Int64)
+[2025-07-27T10:21:34.658Z] LOG:    - product_id (Int64)
+[2025-07-27T10:21:34.658Z] LOG:    - variant_id (Int64)
+[2025-07-27T10:21:34.658Z] LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:21:34.659Z] LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:21:34.659Z] LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:21:34.659Z] LOG:    - currency_code (String)
+[2025-07-27T10:21:34.659Z] LOG: 
+📋 Table: cortex_2_dimensions.dim_time
+[2025-07-27T10:21:34.659Z] LOG:    Columns (11):
+[2025-07-27T10:21:34.659Z] LOG:    - hour_id (DateTime)
+[2025-07-27T10:21:34.659Z] LOG:    - date_id (Date)
+[2025-07-27T10:21:34.659Z] LOG:    - day_of_week (UInt8)
+[2025-07-27T10:21:34.659Z] LOG:    - day_name (String)
+[2025-07-27T10:21:34.659Z] LOG:    - day_of_month (UInt8)
+[2025-07-27T10:21:34.659Z] LOG:    - week_of_year (UInt8)
+[2025-07-27T10:21:34.659Z] LOG:    - month (UInt8)
+[2025-07-27T10:21:34.659Z] LOG:    - month_name (String)
+[2025-07-27T10:21:34.659Z] LOG:    - quarter (UInt8)
+[2025-07-27T10:21:34.659Z] LOG:    - year (UInt16)
+[2025-07-27T10:21:34.659Z] LOG:    - is_weekend (UInt8)
+[2025-07-27T10:21:34.659Z] LOG: 
+
+[2025-07-27T10:21:38.948Z] LOG:    🔧 Generated SQL:  SELECT toUInt16(toStartOfWeek(hour_id)) AS week_start, toUInt8(month(hour_id)) AS month, AVG(amount) AS AoV FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL GROUP BY week_start, month ORDER BY month, week_start LIMIT 10000 
+[2025-07-27T10:21:38.948Z] LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T10:21:38.949Z] LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T10:21:38.949Z] LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales"
+]
+[2025-07-27T10:21:38.949Z] LOG: Pre-validation issues found: 0
+[2025-07-27T10:21:38.949Z] LOG: 🔍 Executing query:  SELECT toUInt16(toStartOfWeek(hour_id)) AS week_start, toUInt8(month(hour_id)) AS month, AVG(amount) AS AoV FROM cortex_3_facts.fct_sales WHERE hour_id >= NOW() - INTERVAL 6 MONTH AND amount IS NOT NULL GROUP BY week_start, month ORDER BY month, week_start LIMIT 10000 
+[2025-07-27T10:21:39.470Z] LOG: 💾 Saved query result: query_cli_1753611688112_zybd3idd4_2025-07-27T10-21-39-469Z.json (24 rows, 2KB)
+[2025-07-27T10:21:39.470Z] LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753611688112_zybd3idd4_2025-07-27T10-21-39-469Z.json
+[2025-07-27T10:21:39.470Z] LOG:    📊 Query returned: 24 rows
+[2025-07-27T10:21:39.470Z] LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T10:21:39.471Z] LOG: 📊 Using representative sample: 24 rows from 24 total
+[2025-07-27T10:21:39.471Z] LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T10:21:52.613Z] LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T10-21-52-612Z.json
+[2025-07-27T10:21:52.694Z] LOG: ✅ Generated Python script passed validation
+[2025-07-27T10:21:52.695Z] LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T10:21:52.726Z] LOG: 🐍 Executing Python analysis script...
+[2025-07-27T10:21:52.727Z] LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z.py
+[2025-07-27T10:21:52.727Z] LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753611688112_zybd3idd4_2025-07-27T10-21-52-695Z
+[2025-07-27T10:21:52.728Z] LOG: 📝 Starting Python script execution...
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: Loaded 24 rows with columns: ['week_start', 'month', 'AoV']
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python:    month       AoV
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: 0      1  2.052833
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: 1      2  2.312493
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: 2      3  2.052371
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: 3      4  1.698092
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: 4      5  1.898230
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: 5      6  2.007302
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: 6      7  2.081475
+[2025-07-27T10:21:54.258Z] LOG: 🐍 Python: Analysis completed successfully!
+[2025-07-27T10:21:54.363Z] LOG: Python script exited with code 0
+[2025-07-27T10:21:54.365Z] LOG: 📊 Step 6: Compiling final response...

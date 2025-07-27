@@ -1,0 +1,41 @@
+{
+  "name": "ecomanalysisagent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "echo 'Linting disabled'",
+    "test:db": "npx tsx test-database.ts",
+    "cli": "npx tsx cli.ts",
+    "analytics": "npx tsx cli.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@ai-sdk/openai": "^0.0.30",
+    "@clickhouse/client": "^1.11.2",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24.1.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "ai": "^3.4.33",
+    "dotenv": "^17.2.0",
+    "next": "^15.4.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.3",
+    "zod": "^4.0.8"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.31.0",
+    "eslint-config-next": "^15.4.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
+  }
+}

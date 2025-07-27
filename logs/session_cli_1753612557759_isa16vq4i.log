@@ -1,0 +1,578 @@
+[2025-07-27T10:35:57.760Z] SESSION_START: User Query: "find me the top 10 products i need to restock considering, if the current inventory is less than 100, and the no of units sold inthe past 45 days is greater than 40 units"
+[2025-07-27T10:35:57.763Z] SYSTEM: Session ID: cli_1753612557759_isa16vq4i
+[2025-07-27T10:35:57.764Z] WORKFLOW_START: Starting query processing workflow
+[2025-07-27T10:35:57.764Z] CONSOLE_LOG: 📝 Step 1: Validating query...
+[2025-07-27T10:35:57.765Z] CONSOLE_LOG:    Query: "find me the top 10 products i need to restock considering, if the current inventory is less than 100, and the no of units sold inthe past 45 days is greater than 40 units"
+[2025-07-27T10:36:02.705Z] MODEL_CALL: Called gpt-4o-mini
+Data: {
+  "model": "gpt-4o-mini",
+  "promptLength": 2065,
+  "responseLength": 1071,
+  "tokens": null,
+  "callNumber": 1
+}
+[2025-07-27T10:36:02.706Z] CONSOLE_LOG:    ✓ Validation result: Valid
+[2025-07-27T10:36:02.706Z] CONSOLE_LOG: ⚙️ Step 2: Generating optimized query...
+[2025-07-27T10:36:02.706Z] CONSOLE_LOG:    📊 Required tables: cortex_2_dimensions.dim_variant, cortex_3_facts.fct_sales, cortex_3_facts.fct_webhook_sales, cortex_2_dimensions.dim_product
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG: 
+🔍 SCHEMA DEBUG: Relevant tables for query generation:
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG: 
+🔍 DEBUGGING SCHEMA INFORMATION:
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG: 
+📋 Table: cortex_2_dimensions.dim_variant
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - shop (LowCardinality(String))
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - variant_sku (Nullable(UInt64))
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    Columns (11):
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - product_id (Nullable(UInt64))
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - variant_title (String)
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - price (Nullable(Float64))
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - cost (Nullable(Float64))
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - currency (String)
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - inventory (Nullable(UInt64))
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - processed_at (DateTime)
+[2025-07-27T10:36:02.707Z] CONSOLE_LOG:    - ingested_at (DateTime64(3))
+[2025-07-27T10:36:02.707Z] SCHEMA_DEBUG: Table cortex_2_dimensions.dim_variant columns
+Data: {
+  "tableName": "cortex_2_dimensions.dim_variant",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "LowCardinality(String)"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_sku",
+      "type": "Nullable(UInt64)"
+    },
+    {
+      "name": "product_id",
+      "type": "Nullable(UInt64)"
+    },
+    {
+      "name": "variant_title",
+      "type": "String"
+    },
+    {
+      "name": "price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency",
+      "type": "String"
+    },
+    {
+      "name": "inventory",
+      "type": "Nullable(UInt64)"
+    },
+    {
+      "name": "processed_at",
+      "type": "DateTime"
+    },
+    {
+      "name": "ingested_at",
+      "type": "DateTime64(3)"
+    }
+  ]
+}
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_sales
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    Columns (12):
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - session_id (String)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - attribution_id (Nullable(String))
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - order_id (String)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG: 
+📋 Table: cortex_3_facts.fct_webhook_sales
+[2025-07-27T10:36:02.708Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "session_id",
+      "type": "String"
+    },
+    {
+      "name": "attribution_id",
+      "type": "Nullable(String)"
+    },
+    {
+      "name": "order_id",
+      "type": "String"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - shop (String)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    Columns (10):
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - hour_id (DateTime)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - customer_id (Int64)
+[2025-07-27T10:36:02.708Z] CONSOLE_LOG:    - order_id (Int64)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - amount (Nullable(Float64))
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - variant_id (Int64)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - unit_price (Nullable(Float64))
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - total_cost (Nullable(Float64))
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - currency_code (String)
+[2025-07-27T10:36:02.709Z] SCHEMA_DEBUG: Table cortex_3_facts.fct_webhook_sales columns
+Data: {
+  "tableName": "cortex_3_facts.fct_webhook_sales",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "String"
+    },
+    {
+      "name": "hour_id",
+      "type": "DateTime"
+    },
+    {
+      "name": "customer_id",
+      "type": "Int64"
+    },
+    {
+      "name": "order_id",
+      "type": "Int64"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "variant_id",
+      "type": "Int64"
+    },
+    {
+      "name": "amount",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "unit_price",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "total_cost",
+      "type": "Nullable(Float64)"
+    },
+    {
+      "name": "currency_code",
+      "type": "String"
+    }
+  ]
+}
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG: 
+📋 Table: cortex_2_dimensions.dim_product
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    Columns (11):
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - shop (LowCardinality(String))
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - product_id (Int64)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - product_title (String)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - product_url (String)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - product_type (String)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - vendor (String)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - status (String)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - inventory (Nullable(UInt64))
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - tags (Array(String))
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - processed_at (DateTime)
+[2025-07-27T10:36:02.709Z] CONSOLE_LOG:    - ingested_at (DateTime64(3))
+[2025-07-27T10:36:02.709Z] SCHEMA_DEBUG: Table cortex_2_dimensions.dim_product columns
+Data: {
+  "tableName": "cortex_2_dimensions.dim_product",
+  "columns": [
+    {
+      "name": "shop",
+      "type": "LowCardinality(String)"
+    },
+    {
+      "name": "product_id",
+      "type": "Int64"
+    },
+    {
+      "name": "product_title",
+      "type": "String"
+    },
+    {
+      "name": "product_url",
+      "type": "String"
+    },
+    {
+      "name": "product_type",
+      "type": "String"
+    },
+    {
+      "name": "vendor",
+      "type": "String"
+    },
+    {
+      "name": "status",
+      "type": "String"
+    },
+    {
+      "name": "inventory",
+      "type": "Nullable(UInt64)"
+    },
+    {
+      "name": "tags",
+      "type": "Array(String)"
+    },
+    {
+      "name": "processed_at",
+      "type": "DateTime"
+    },
+    {
+      "name": "ingested_at",
+      "type": "DateTime64(3)"
+    }
+  ]
+}
+[2025-07-27T10:36:02.710Z] CONSOLE_LOG: 
+
+[2025-07-27T10:36:08.383Z] CONSOLE_LOG:    🔧 Generated SQL: SELECT p.product_id, p.product_title, v.inventory, SUM(s.units_sold) AS total_units_sold
+FROM (
+ SELECT product_id, COUNT(*) AS units_sold
+ FROM (
+ SELECT product_id
+ FROM cortex_3_facts.fct_sales
+ WHERE hour_id >= NOW() - toIntervalDay(45)
+ UNION ALL
+ SELECT product_id
+ FROM cortex_3_facts.fct_webhook_sales
+ WHERE hour_id >= NOW() - toIntervalDay(45)
+ )
+ GROUP BY product_id
+) AS s
+JOIN cortex_2_dimensions.dim_product AS p ON CAST(s.product_id AS String) = CAST(p.product_id AS String)
+JOIN cortex_2_dimensions.dim_variant AS v ON CAST(p.product_id AS String) = CAST(v.product_id AS String)
+WHERE v.inventory < 100
+GROUP BY p.product_id, p.product_title, v.inventory
+HAVING total_units_sold > 40
+ORDER BY total_units_sold DESC
+LIMIT 10
+[2025-07-27T10:36:08.383Z] CONSOLE_LOG: 🔍 Step 3: Executing query and saving data...
+[2025-07-27T10:36:08.385Z] CONSOLE_LOG: Pre-validation issues found: 1
+[2025-07-27T10:36:08.384Z] CONSOLE_LOG: Table references found: [
+  "FROM cortex_3_facts.fct_sales",
+  "FROM cortex_3_facts.fct_webhook_sales",
+  "JOIN cortex_2_dimensions.dim_product",
+  "JOIN cortex_2_dimensions.dim_variant"
+]
+[2025-07-27T10:36:08.385Z] CONSOLE_LOG: ⚠️  Pre-execution validation found issues: [
+  "ERROR: inventory column referenced from fct_sales table - inventory is only in dim_variant"
+]
+[2025-07-27T10:36:08.384Z] CONSOLE_LOG: 🔍 Pre-execution Query Analysis:
+[2025-07-27T10:36:08.385Z] CONSOLE_LOG: 🔍 Executing query: SELECT p.product_id, p.product_title, v.inventory, SUM(s.units_sold) AS total_units_sold
+FROM (
+ SELECT product_id, COUNT(*) AS units_sold
+ FROM (
+ SELECT product_id
+ FROM cortex_3_facts.fct_sales
+ WHERE hour_id >= NOW() - toIntervalDay(45)
+ UNION ALL
+ SELECT product_id
+ FROM cortex_3_facts.fct_webhook_sales
+ WHERE hour_id >= NOW() - toIntervalDay(45)
+ )
+ GROUP BY product_id
+) AS s
+JOIN cortex_2_dimensions.dim_product AS p ON CAST(s.product_id AS String) = CAST(p.product_id AS String)
+JOIN cortex_2_dimensions.dim_variant AS v ON CAST(p.product_id AS String) = CAST(v.product_id AS String)
+WHERE v.inventory < 100
+GROUP BY p.product_id, p.product_title, v.inventory
+HAVING total_units_sold > 40
+ORDER BY total_units_sold DESC
+LIMIT 10
+[2025-07-27T10:36:08.887Z] DATABASE_QUERY: Query SUCCESS
+Data: {
+  "query": "SELECT p.product_id, p.product_title, v.inventory, SUM(s.units_sold) AS total_units_sold\nFROM (\n SELECT product_id, COUNT(*) AS units_sold\n FROM (\n SELECT product_id\n FROM cortex_3_facts.fct_sales\n WHERE hour_id >= NOW() - toIntervalDay(45)\n UNION ALL\n SELECT product_id\n FROM cortex_3_facts.fct_webhook_sales\n WHERE hour_id >= NOW() - toIntervalDay(45)\n )\n GROUP BY product_id\n) AS s\nJOIN cortex_2_dimensions.dim_product AS p ON CAST(s.product_id AS String) = CAST(p.product_id AS String)\nJOIN cortex_2_dimensions.dim_variant AS v ON CAST(p.product_id AS String) = CAST(v.product_id AS String)\nWHERE v.inventory < 100\nGROUP BY p.product_id, p.product_title, v.inventory\nHAVING total_units_sold > 40\nORDER BY total_units_sold DESC\nLIMIT 10",
+  "success": true,
+  "rowCount": 10,
+  "error": null,
+  "queryNumber": 1
+}
+[2025-07-27T10:36:08.890Z] CONSOLE_LOG: 💾 Saved query result: query_cli_1753612557759_isa16vq4i_2025-07-27T10-36-08-888Z.json (10 rows, 3KB)
+[2025-07-27T10:36:08.890Z] CONSOLE_LOG:    📁 Data saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753612557759_isa16vq4i_2025-07-27T10-36-08-888Z.json
+[2025-07-27T10:36:08.890Z] CONSOLE_LOG:    📊 Query returned: 10 rows
+[2025-07-27T10:36:08.890Z] CONSOLE_LOG: 🧠 Step 4: Generating analysis strategy...
+[2025-07-27T10:36:08.891Z] CONSOLE_LOG: 📝 Generating analysis strategy (attempt 1/2)...
+[2025-07-27T10:36:08.891Z] CONSOLE_LOG: 📊 Using representative sample: 10 rows from 10 total
+[2025-07-27T10:36:19.000Z] CONSOLE_LOG: 💾 Raw AI response saved to: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/ai-responses/analysis-strategy_2025-07-27T10-36-18-997Z.json
+[2025-07-27T10:36:19.000Z] MODEL_CALL: Called gpt-4o
+Data: {
+  "model": "gpt-4o",
+  "promptLength": 4834,
+  "responseLength": 4356,
+  "tokens": null,
+  "callNumber": 2
+}
+[2025-07-27T10:36:19.076Z] CONSOLE_LOG: ✅ Generated Python script passed validation
+[2025-07-27T10:36:19.076Z] CONSOLE_LOG: 🐍 Step 5: Executing Python analysis...
+[2025-07-27T10:36:19.114Z] CONSOLE_LOG: 🐍 Executing Python analysis script...
+[2025-07-27T10:36:19.114Z] CONSOLE_LOG: 📁 Script path: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z.py
+[2025-07-27T10:36:19.114Z] CONSOLE_LOG: 📝 Starting Python script execution...
+[2025-07-27T10:36:19.114Z] CONSOLE_LOG: 📂 Output directory: /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z
+[2025-07-27T10:36:20.359Z] CONSOLE_LOG: 🐍 Python: Loaded 10 rows with columns: ['p.product_id', 'product_title', 'v.inventory', 'total_units_sold']
+[2025-07-27T10:36:20.359Z] CONSOLE_LOG: 🐍 Python: Analysis completed successfully!
+[2025-07-27T10:36:20.359Z] CONSOLE_LOG: 🐍 Python: Top 10 products to restock saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z/top_10_products_to_restock.csv
+[2025-07-27T10:36:20.457Z] CONSOLE_LOG: Python script exited with code 0
+[2025-07-27T10:36:20.457Z] PYTHON_SCRIPT: Python execution SUCCESS
+Data: {
+  "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z.py",
+  "success": true,
+  "output": "Loaded 10 rows with columns: ['p.product_id', 'product_title', 'v.inventory', 'total_units_sold']\nTop 10 products to restock saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z/top_10_products_to_restock.csv\nAnalysis completed successfully!\n",
+  "error": ""
+}
+[2025-07-27T10:36:20.458Z] CONSOLE_LOG: 📊 Step 6: Compiling final response...
+[2025-07-27T10:36:20.458Z] SESSION_END: Session completed successfully
+Data: {
+  "success": true,
+  "finalData": {
+    "success": true,
+    "workflow": {
+      "step": 1,
+      "userQuery": "find me the top 10 products i need to restock considering, if the current inventory is less than 100, and the no of units sold inthe past 45 days is greater than 40 units",
+      "sessionId": "cli_1753612557759_isa16vq4i",
+      "timestamp": "2025-07-27T10:35:57.764Z",
+      "validation": {
+        "isValid": true,
+        "requiredTables": [
+          "cortex_2_dimensions.dim_variant",
+          "cortex_3_facts.fct_sales",
+          "cortex_3_facts.fct_webhook_sales",
+          "cortex_2_dimensions.dim_product"
+        ],
+        "reason": "The query can be answered using the available columns. The inventory data is available in 'dim_variant.inventory', and sales data can be obtained from both 'fct_sales' and 'fct_webhook_sales'. The necessary conditions for inventory and sales can be applied using these tables.",
+        "suggestedApproach": "To approach this query, first, join 'dim_variant' with 'dim_product' to get product details and inventory. Then, aggregate sales data from both 'fct_sales' and 'fct_webhook_sales' for the past 45 days, filtering for products with inventory less than 100 and total units sold greater than 40. Finally, sort the results and limit to the top 10 products.",
+        "columnMappings": {
+          "inventory": "dim_variant.inventory",
+          "sales": "SUM(fct_sales.amount) + SUM(fct_webhook_sales.amount)",
+          "revenue": "calculated from amount * unit_price"
+        }
+      },
+      "queryObj": {
+        "query": "SELECT p.product_id, p.product_title, v.inventory, SUM(s.units_sold) AS total_units_sold\nFROM (\n SELECT product_id, COUNT(*) AS units_sold\n FROM (\n SELECT product_id\n FROM cortex_3_facts.fct_sales\n WHERE hour_id >= NOW() - toIntervalDay(45)\n UNION ALL\n SELECT product_id\n FROM cortex_3_facts.fct_webhook_sales\n WHERE hour_id >= NOW() - toIntervalDay(45)\n )\n GROUP BY product_id\n) AS s\nJOIN cortex_2_dimensions.dim_product AS p ON CAST(s.product_id AS String) = CAST(p.product_id AS String)\nJOIN cortex_2_dimensions.dim_variant AS v ON CAST(p.product_id AS String) = CAST(v.product_id AS String)\nWHERE v.inventory < 100\nGROUP BY p.product_id, p.product_title, v.inventory\nHAVING total_units_sold > 40\nORDER BY total_units_sold DESC\nLIMIT 10",
+        "explanation": "This query retrieves the top 10 products that need to be restocked based on the criteria of having an inventory of less than 100 and having sold more than 40 units in the past 45 days. It combines sales data from both sales tables, aggregates the sales counts, and joins with the product and variant tables to filter and sort the results accordingly.",
+        "estimatedRows": 10,
+        "dataPreview": "The output will include product IDs, product titles, current inventory levels, and total units sold for the top 10 products that meet the restocking criteria."
+      },
+      "queryResult": {
+        "success": true,
+        "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753612557759_isa16vq4i_2025-07-27T10-36-08-888Z.json",
+        "filename": "query_cli_1753612557759_isa16vq4i_2025-07-27T10-36-08-888Z.json",
+        "dataFile": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/queries/query_cli_1753612557759_isa16vq4i_2025-07-27T10-36-08-888Z.json",
+        "rowCount": 10,
+        "dataSize": 2668,
+        "data": [
+          {
+            "p.product_id": "11547050574092",
+            "product_title": "YOUNG POONG YOPOKKI Tteokbokki Käse 120g",
+            "v.inventory": "67",
+            "total_units_sold": "1034"
+          },
+          {
+            "p.product_id": "11627220533516",
+            "product_title": "NUR 1 CENT MEET SEOUL Ade Beutelgetränke Blaue Zitrone 230ml - 3 Stück Max pro Bestellung",
+            "v.inventory": "0",
+            "total_units_sold": "820"
+          },
+          {
+            "p.product_id": "8392155267340",
+            "product_title": "YUMEI scharfes Kohl-Kimchi 100g",
+            "v.inventory": "55",
+            "total_units_sold": "439"
+          },
+          {
+            "p.product_id": "8564968718604",
+            "product_title": "WEILONG Latiao Scharf & Würzig 106g",
+            "v.inventory": "11",
+            "total_units_sold": "429"
+          },
+          {
+            "p.product_id": "11532515049740",
+            "product_title": "SAMYANG Instant Nudel Schüssel Hot Chicken Carbonara 80g",
+            "v.inventory": "82",
+            "total_units_sold": "401"
+          },
+          {
+            "p.product_id": "8525395984652",
+            "product_title": "YOUNG POONG YOPOKKI Tteokbokki Original Süß & Würzig 140g",
+            "v.inventory": "72",
+            "total_units_sold": "331"
+          },
+          {
+            "p.product_id": "11526585417996",
+            "product_title": "CANTABILE Ade Beutelgetränke Blaubeer 230ml",
+            "v.inventory": "76",
+            "total_units_sold": "322"
+          },
+          {
+            "p.product_id": "8722684018956",
+            "product_title": "BAIJIA A-Kuan Breite Nudeln mit Sesampaste 115g",
+            "v.inventory": "0",
+            "total_units_sold": "319"
+          },
+          {
+            "p.product_id": "8508704915724",
+            "product_title": "MORINAGA Hi-Chew Grüner Apfel 55g",
+            "v.inventory": "55",
+            "total_units_sold": "305"
+          },
+          {
+            "p.product_id": "11469477052684",
+            "product_title": "(KW) SAMYANG Hot Chicken Carbonara Gyoza Teigtasche 700g",
+            "v.inventory": "57",
+            "total_units_sold": "296"
+          }
+        ]
+      },
+      "strategy": {
+        "analysisDecision": {
+          "shouldAnalyze": true,
+          "reasoning": "The query involves numerical data related to inventory and sales, which can benefit from analysis to identify trends and patterns. Python analysis can help automate the identification of products that need restocking based on the specified criteria, and provide insights into sales performance."
+        },
+        "insights": {
+          "immediate": [
+            "Several products have inventory levels below 100 and have sold more than 40 units in the past 45 days, indicating a need for restocking."
+          ],
+          "statistical": [
+            "The average inventory level of products needing restock is significantly lower than the threshold of 100 units.",
+            "The average units sold for these products is well above the 40 units threshold, indicating high demand."
+          ],
+          "business": [
+            "Restocking these high-demand products can prevent stockouts and potential loss of sales.",
+            "Understanding which products are frequently needing restock can inform future inventory management and purchasing decisions."
+          ]
+        },
+        "pythonScript": {
+          "description": "This script identifies the top 10 products that need restocking based on inventory levels and sales data. It filters products with inventory less than 100 and units sold greater than 40, then sorts them by units sold to prioritize restocking.",
+          "code": "# Import necessary libraries\nimport pandas as pd\nimport os\n\n# Sample data\ndata = [\n {\"p.product_id\": \"11547050574092\", \"product_title\": \"YOUNG POONG YOPOKKI Tteokbokki Käse 120g\", \"v.inventory\": 67, \"total_units_sold\": 1034},\n {\"p.product_id\": \"11627220533516\", \"product_title\": \"NUR 1 CENT MEET SEOUL Ade Beutelgetränke Blaue Zitrone 230ml - 3 Stück Max pro B...\", \"v.inventory\": 0, \"total_units_sold\": 820},\n {\"p.product_id\": \"8392155267340\", \"product_title\": \"YUMEI scharfes Kohl-Kimchi 100g\", \"v.inventory\": 55, \"total_units_sold\": 439},\n {\"p.product_id\": \"8564968718604\", \"product_title\": \"WEILONG Latiao Scharf & Würzig 106g\", \"v.inventory\": 11, \"total_units_sold\": 429},\n {\"p.product_id\": \"11532515049740\", \"product_title\": \"SAMYANG Instant Nudel Schüssel Hot Chicken Carbonara 80g\", \"v.inventory\": 82, \"total_units_sold\": 401},\n {\"p.product_id\": \"8525395984652\", \"product_title\": \"YOUNG POONG YOPOKKI Tteokbokki Original Süß & Würzig 140g\", \"v.inventory\": 72, \"total_units_sold\": 331},\n {\"p.product_id\": \"11526585417996\", \"product_title\": \"CANTABILE Ade Beutelgetränke Blaubeer 230ml\", \"v.inventory\": 76, \"total_units_sold\": 322},\n {\"p.product_id\": \"8722684018956\", \"product_title\": \"BAIJIA A-Kuan Breite Nudeln mit Sesampaste 115g\", \"v.inventory\": 0, \"total_units_sold\": 319},\n {\"p.product_id\": \"8508704915724\", \"product_title\": \"MORINAGA Hi-Chew Grüner Apfel 55g\", \"v.inventory\": 55, \"total_units_sold\": 305},\n {\"p.product_id\": \"11469477052684\", \"product_title\": \"(KW) SAMYANG Hot Chicken Carbonara Gyoza Teigtasche 700g\", \"v.inventory\": 57, \"total_units_sold\": 296}\n]\n\n# Convert data to DataFrame\ndf = pd.DataFrame(data)\n\n# Filter products with inventory < 100 and units sold > 40\nfiltered_df = df[(df['v.inventory'] < 100) & (df['total_units_sold'] > 40)]\n\n# Sort by total units sold in descending order\nsorted_df = filtered_df.sort_values(by='total_units_sold', ascending=False)\n\n# Select top 10 products\ntop_10_products = sorted_df.head(10)\n\n# Output directory\noutput_dir = '.'\n\n# Save the result to a CSV file\noutput_file = os.path.join(output_dir, 'top_10_products_to_restock.csv')\ntop_10_products.to_csv(output_file, index=False)\n\nprint(f'Top 10 products to restock saved to {output_file}')",
+          "outputFiles": [
+            "top_10_products_to_restock.csv"
+          ],
+          "skipAnalysis": false,
+          "missingDependencies": []
+        },
+        "recommendations": [
+          "Restock the identified top 10 products to meet customer demand and avoid potential stockouts.",
+          "Implement a regular review process for inventory levels and sales data to proactively manage stock levels."
+        ],
+        "followUpQuestions": [
+          "Are there any seasonal trends affecting the sales of these products?",
+          "What is the lead time for restocking these products, and how does it impact inventory management?"
+        ]
+      },
+      "analysisResult": {
+        "success": true,
+        "output": "Loaded 10 rows with columns: ['p.product_id', 'product_title', 'v.inventory', 'total_units_sold']\nTop 10 products to restock saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z/top_10_products_to_restock.csv\nAnalysis completed successfully!\n",
+        "error": null,
+        "scriptPath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/scripts/analysis_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z.py",
+        "outputDir": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z",
+        "outputFiles": [
+          {
+            "filename": "top_10_products_to_restock.csv",
+            "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z/top_10_products_to_restock.csv",
+            "size": 771,
+            "type": ".csv"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "dataProcessed": "10 rows (3KB)",
+      "query": "SELECT p.product_id, p.product_title, v.inventory, SUM(s.units_sold) AS total_units_sold\nFROM (\n SELECT product_id, COUNT(*) AS units_sold\n FROM (\n SELECT product_id\n FROM cortex_3_facts.fct_sales\n WHERE hour_id >= NOW() - toIntervalDay(45)\n UNION ALL\n SELECT product_id\n FROM cortex_3_facts.fct_webhook_sales\n WHERE hour_id >= NOW() - toIntervalDay(45)\n )\n GROUP BY product_id\n) AS s\nJOIN cortex_2_dimensions.dim_product AS p ON CAST(s.product_id AS String) = CAST(p.product_id AS String)\nJOIN cortex_2_dimensions.dim_variant AS v ON CAST(p.product_id AS String) = CAST(v.product_id AS String)\nWHERE v.inventory < 100\nGROUP BY p.product_id, p.product_title, v.inventory\nHAVING total_units_sold > 40\nORDER BY total_units_sold DESC\nLIMIT 10",
+      "insights": {
+        "immediate": [
+          "Several products have inventory levels below 100 and have sold more than 40 units in the past 45 days, indicating a need for restocking."
+        ],
+        "statistical": [
+          "The average inventory level of products needing restock is significantly lower than the threshold of 100 units.",
+          "The average units sold for these products is well above the 40 units threshold, indicating high demand."
+        ],
+        "business": [
+          "Restocking these high-demand products can prevent stockouts and potential loss of sales.",
+          "Understanding which products are frequently needing restock can inform future inventory management and purchasing decisions."
+        ]
+      },
+      "recommendations": [
+        "Restock the identified top 10 products to meet customer demand and avoid potential stockouts.",
+        "Implement a regular review process for inventory levels and sales data to proactively manage stock levels."
+      ],
+      "followUpQuestions": [
+        "Are there any seasonal trends affecting the sales of these products?",
+        "What is the lead time for restocking these products, and how does it impact inventory management?"
+      ],
+      "analysisOutput": "Loaded 10 rows with columns: ['p.product_id', 'product_title', 'v.inventory', 'total_units_sold']\nTop 10 products to restock saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z/top_10_products_to_restock.csv\nAnalysis completed successfully!\n",
+      "generatedFiles": [
+        {
+          "filename": "top_10_products_to_restock.csv",
+          "filepath": "/Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/data/analysis/session_cli_1753612557759_isa16vq4i_2025-07-27T10-36-19-076Z/top_10_products_to_restock.csv",
+          "size": 771,
+          "type": ".csv"
+        }
+      ]
+    }
+  },
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 2,
+    "modelCallsByType": {
+      "gpt-4o-mini": 1,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T10:35:57.760Z",
+    "endTime": "2025-07-27T10:36:20.458Z",
+    "durationMs": 22698,
+    "durationSeconds": 23
+  }
+}
+[2025-07-27T10:36:20.459Z] SYSTEM: Console output saved to /Users/abdulmannan/Desktop/Development/EcomAnalysisAgent/logs/console_cli_1753612557759_isa16vq4i.log

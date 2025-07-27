@@ -1,0 +1,31 @@
+{
+  "sessionId": "cli_1753611357228_nyzyicbz3",
+  "userQuery": "AOV: 120",
+  "success": true,
+  "stats": {
+    "queriesExecuted": 1,
+    "modelCalls": 5,
+    "modelCallsByType": {
+      "gpt-4o-mini": 4,
+      "gpt-4o": 1
+    },
+    "retryAttempts": 0,
+    "errors": 0,
+    "startTime": "2025-07-27T10:15:57.231Z",
+    "endTime": "2025-07-27T10:17:11.885Z",
+    "durationMs": 74654,
+    "durationSeconds": 75
+  },
+  "summary": {
+    "totalQueries": 1,
+    "totalModelCalls": 5,
+    "modelBreakdown": {
+      "gpt-4o-mini": 4,
+      "gpt-4o": 1
+    },
+    "totalRetries": 0,
+    "totalErrors": 0,
+    "duration": "75s",
+    "errorRate": "0.00%"
+  }
+}

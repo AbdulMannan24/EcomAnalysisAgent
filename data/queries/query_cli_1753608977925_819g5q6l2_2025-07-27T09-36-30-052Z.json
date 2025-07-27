@@ -1,0 +1,89 @@
+{
+  "timestamp": "2025-07-27T09-36-30-052Z",
+  "userQuery": "This query retrieves the top 10 best-selling products by revenue over the last 3 months. It joins the sales data with product details to enrich the output with product information. The total revenue is calculated by summing the total_cost from the sales table, and results are ordered by revenue in descending order.",
+  "sqlQuery": " SELECT p.product_id, p.product_title, p.product_url, p.product_type, p.vendor, SUM(COALESCE(s.total_cost, 0)) AS total_revenue FROM cortex_3_facts.fct_sales AS s JOIN cortex_2_dimensions.dim_product AS p ON CAST(s.product_id AS String) = CAST(p.product_id AS String) WHERE s.hour_id >= NOW() - INTERVAL 3 MONTH GROUP BY p.product_id, p.product_title, p.product_url, p.product_type, p.vendor ORDER BY total_revenue DESC LIMIT 10 ",
+  "rowCount": 10,
+  "dataSize": 2743,
+  "data": [
+    {
+      "p.product_id": "8431711813900",
+      "product_title": "SAMYANG Instant Nudeln Hot Chicken Carbonara 130g",
+      "product_url": "https://mao-mao.de/products/samyang-instant-ramen-hot-chicken-carbonara-130g",
+      "product_type": "Hot Deal",
+      "vendor": "Samyang",
+      "total_revenue": 9358.74
+    },
+    {
+      "p.product_id": "8555677778188",
+      "product_title": "SAMYANG Instant Nudeln Hot Chicken Cream Carbonara 140g",
+      "product_url": "https://mao-mao.de/products/samyang-instant-nudeln-hot-chicken-cream-carbonara-140g",
+      "product_type": "NOTONSALE",
+      "vendor": "Samyang",
+      "total_revenue": 4043.070000000009
+    },
+    {
+      "p.product_id": "8555621810444",
+      "product_title": "SAMYANG Instant Nudeln Hot Chicken Quattro 4-Käse 145g",
+      "product_url": "https://mao-mao.de/products/samyang-instant-nudeln-hot-chicken-quattro-cheese-145g",
+      "product_type": "NOTONSALE",
+      "vendor": "Samyang",
+      "total_revenue": 2880.9900000000043
+    },
+    {
+      "p.product_id": "8384273809676",
+      "product_title": "SAMYANG Instant Nudeln Hot Chicken Käse 140g",
+      "product_url": "https://mao-mao.de/products/samyang-hot-chicken-cheese-flavor-ramen-140g",
+      "product_type": "NOTONSALE",
+      "vendor": "Samyang",
+      "total_revenue": 2394.6299999999983
+    },
+    {
+      "p.product_id": "11547050574092",
+      "product_title": "YOUNG POONG YOPOKKI Tteokbokki Käse 120g",
+      "product_url": "https://mao-mao.de/products/young-poong-yopokki-tteokbokki-kase-120g",
+      "product_type": "Instant Noodles",
+      "vendor": "Young Poong",
+      "total_revenue": 2308.87
+    },
+    {
+      "p.product_id": "8454565396748",
+      "product_title": "Gebühr Kühltasche Kühlware / Fee Cooling Bag & cold products",
+      "product_url": "https://mao-mao.de/products/product-fee",
+      "product_type": "fee",
+      "vendor": "MAOMAO",
+      "total_revenue": 2277.3999999999955
+    },
+    {
+      "p.product_id": "9701478662412",
+      "product_title": "SAMYANG Instant Nudeln Buldak Korean Frittiertes Hähnchen süß & scharf 140g",
+      "product_url": "https://mao-mao.de/products/samyang-instant-nudeln-hot-chicken-frittiertes-huhnchen-suss-scharf-140g-limitiert",
+      "product_type": "NOTONSALE",
+      "vendor": "Samyang",
+      "total_revenue": 2186.9700000000016
+    },
+    {
+      "p.product_id": "8708834394380",
+      "product_title": "Mystery box - Korea Style",
+      "product_url": "https://mao-mao.de/products/mystery-box-korea-style",
+      "product_type": "",
+      "vendor": "MAOMAO",
+      "total_revenue": 1687.590000000001
+    },
+    {
+      "p.product_id": "11524211900684",
+      "product_title": "SAMYANG Tangle Bulgogi Alfredo 108g",
+      "product_url": "https://mao-mao.de/products/samyang-tangle-bulgogi-alfredo-108g",
+      "product_type": "NOTONSALE",
+      "vendor": "Samyang",
+      "total_revenue": 1684.0700000000013
+    },
+    {
+      "p.product_id": "8447277990156",
+      "product_title": "NONG SHIM Instant Nudeln Chapagetti 140g (1+1 Aktion, Gratisprodukte müssen selber in den Warenkorb gelegt werden)",
+      "product_url": "https://mao-mao.de/products/nong-shim-chapaghetti-instant-nudeln-140g",
+      "product_type": "Instant Noodles",
+      "vendor": "Nong Shim",
+      "total_revenue": 1600.4299999999992
+    }
+  ]
+}

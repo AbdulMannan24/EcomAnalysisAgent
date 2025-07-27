@@ -1,0 +1,69 @@
+{
+  "timestamp": "2025-07-27T10-36-08-888Z",
+  "userQuery": "This query retrieves the top 10 products that need to be restocked based on the criteria of having an inventory of less than 100 and having sold more than 40 units in the past 45 days. It combines sales data from both sales tables, aggregates the sales counts, and joins with the product and variant tables to filter and sort the results accordingly.",
+  "sqlQuery": "SELECT p.product_id, p.product_title, v.inventory, SUM(s.units_sold) AS total_units_sold\nFROM (\n SELECT product_id, COUNT(*) AS units_sold\n FROM (\n SELECT product_id\n FROM cortex_3_facts.fct_sales\n WHERE hour_id >= NOW() - toIntervalDay(45)\n UNION ALL\n SELECT product_id\n FROM cortex_3_facts.fct_webhook_sales\n WHERE hour_id >= NOW() - toIntervalDay(45)\n )\n GROUP BY product_id\n) AS s\nJOIN cortex_2_dimensions.dim_product AS p ON CAST(s.product_id AS String) = CAST(p.product_id AS String)\nJOIN cortex_2_dimensions.dim_variant AS v ON CAST(p.product_id AS String) = CAST(v.product_id AS String)\nWHERE v.inventory < 100\nGROUP BY p.product_id, p.product_title, v.inventory\nHAVING total_units_sold > 40\nORDER BY total_units_sold DESC\nLIMIT 10",
+  "rowCount": 10,
+  "dataSize": 1452,
+  "data": [
+    {
+      "p.product_id": "11547050574092",
+      "product_title": "YOUNG POONG YOPOKKI Tteokbokki Käse 120g",
+      "v.inventory": "67",
+      "total_units_sold": "1034"
+    },
+    {
+      "p.product_id": "11627220533516",
+      "product_title": "NUR 1 CENT MEET SEOUL Ade Beutelgetränke Blaue Zitrone 230ml - 3 Stück Max pro Bestellung",
+      "v.inventory": "0",
+      "total_units_sold": "820"
+    },
+    {
+      "p.product_id": "8392155267340",
+      "product_title": "YUMEI scharfes Kohl-Kimchi 100g",
+      "v.inventory": "55",
+      "total_units_sold": "439"
+    },
+    {
+      "p.product_id": "8564968718604",
+      "product_title": "WEILONG Latiao Scharf & Würzig 106g",
+      "v.inventory": "11",
+      "total_units_sold": "429"
+    },
+    {
+      "p.product_id": "11532515049740",
+      "product_title": "SAMYANG Instant Nudel Schüssel Hot Chicken Carbonara 80g",
+      "v.inventory": "82",
+      "total_units_sold": "401"
+    },
+    {
+      "p.product_id": "8525395984652",
+      "product_title": "YOUNG POONG YOPOKKI Tteokbokki Original Süß & Würzig 140g",
+      "v.inventory": "72",
+      "total_units_sold": "331"
+    },
+    {
+      "p.product_id": "11526585417996",
+      "product_title": "CANTABILE Ade Beutelgetränke Blaubeer 230ml",
+      "v.inventory": "76",
+      "total_units_sold": "322"
+    },
+    {
+      "p.product_id": "8722684018956",
+      "product_title": "BAIJIA A-Kuan Breite Nudeln mit Sesampaste 115g",
+      "v.inventory": "0",
+      "total_units_sold": "319"
+    },
+    {
+      "p.product_id": "8508704915724",
+      "product_title": "MORINAGA Hi-Chew Grüner Apfel 55g",
+      "v.inventory": "55",
+      "total_units_sold": "305"
+    },
+    {
+      "p.product_id": "11469477052684",
+      "product_title": "(KW) SAMYANG Hot Chicken Carbonara Gyoza Teigtasche 700g",
+      "v.inventory": "57",
+      "total_units_sold": "296"
+    }
+  ]
+}
